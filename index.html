@@ -34,7 +34,7 @@
         <aside class="sidebar">
             <div class="profile-container">
                 <div class="photo-frame-round">
-                    <!-- Contenedor para el efecto de hover con GIF -->
+                    <!-- Contenedor optimizado para el efecto GIF y escalado correcto -->
                     <div class="photo-container">
                         <img src="Public/images/Picture.webp" alt="Jonathan Mosquera" class="profile-photo" onerror="this.src='https://via.placeholder.com/160?text=JM'">
                         <img src="Public/images/Picture.gif" alt="Jonathan GIF" class="profile-gif">
@@ -114,7 +114,7 @@
     <script>
         // Configuración inicial de estado
         let currentLang = 'es';
-        let currentProfile = 'software'; // Carga perfil software por defecto
+        let currentProfile = 'software'; 
 
         const data = {
             software: {
@@ -153,7 +153,7 @@
                     role: "Operations Engineer | Project Manager",
                     summary: "Mechanical Engineer expert in industrial project management and operational optimization. Specialist in leading technical teams and applying Lean methodologies. Mastery of advanced Project Management tools and Office automation to maximize productivity and safety.",
                     exp: [
-                        { t: "Commercial / Technical Director", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Technical leadership for projects with Hitachi Energy and Suzuki.", "Optimization of maintenance and assembly processes."] },
+                        { t: "Commercial / Technical Director", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Technical leadership for projects with Hitachi Energy y Suzuki.", "Optimization of maintenance and assembly processes."] },
                         { t: "Resident Engineer", c: "Ingeniería de Pereira (Bioenergy)", d: "2016 - 2018", url: "#", tasks: ["Supervision of 30+ operators crews.", "Quality Dossier control and isometric drawing interpretation."] },
                         { t: "Resident Engineer", c: "Industrias del Pacífico", d: "2015 - 2019", url: "#", tasks: ["Assembly of tanks and certified metallic structures.", "Assurance of welding standards and industrial safety."] }
                     ]
@@ -200,27 +200,22 @@
             const p = data[currentProfile][currentLang];
             const s = staticData[currentLang];
 
-            // Renderizado de textos principales
             document.getElementById('dynamic-role').innerText = p.role;
             document.getElementById('dynamic-summary').innerText = p.summary;
             
-            // Actualización de títulos
             Object.keys(s.titles).forEach(id => {
                 const el = document.getElementById(`title-${id}`);
                 if(el) el.innerText = s.titles[id];
             });
 
-            // Renderizado de habilidades
             document.getElementById('skills-container').innerHTML = s.skills.map(skill => `
                 <div class="skill-item">
                     <div class="skill-name"><span>${skill}</span></div>
                     <div class="progress-bg"><div class="progress-fill" style="width: 90%"></div></div>
                 </div>`).join('');
 
-            // SENA
             document.getElementById('sena-list').innerHTML = s.sena.map(item => `<li>${item}</li>`).join('');
 
-            // Experiencia
             document.getElementById('experience-timeline').innerHTML = p.exp.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -237,7 +232,6 @@
                     ${(e.url && e.url !== "#") ? `<a href="${e.url}" target="_blank" class="exp-link"><i class="fas fa-external-link-alt"></i> ${s.goPage}</a>` : ''}
                 </div>`).join('');
 
-            // Educación
             document.getElementById('education-timeline').innerHTML = s.edu.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -262,7 +256,6 @@
             render();
         }
 
-        // Función de impresión
         function handlePrint() {
             window.focus();
             window.print();
@@ -270,7 +263,6 @@
 
         window.onload = () => {
             render();
-            // Ajuste de viewport para móviles
             if(window.innerWidth < 850) {
                 document.querySelector('meta[name="viewport"]').setAttribute("content", "width=850, initial-scale=0.4");
             }

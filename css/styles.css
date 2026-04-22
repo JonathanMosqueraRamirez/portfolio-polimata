@@ -24,7 +24,7 @@ body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background-color: #f4f7f6;
     color: var(--text-dark);
-    line-height: 1.4; /* Ajustado para mejor ajuste de texto */
+    line-height: 1.4; /* Ajuste para optimizar espacio en tamaño carta */
 }
 
 /* ================================================================
@@ -86,22 +86,17 @@ body {
     transform: translateY(-1px);
 }
 
-.btn:active {
-    transform: translateY(1px);
-    filter: brightness(0.9);
-}
-
 /* ================================================================
    ESTRUCTURA PRINCIPAL (AJUSTE TAMAÑO CARTA)
    ================================================================ */
 .cv-wrapper {
-    width: 816px; /* Ancho estándar de hoja carta a 96 DPI */
+    width: 816px; /* Ancho carta a 96 DPI */
     margin: 80px auto 40px;
     background: var(--white);
     display: flex; 
     flex-direction: row;
     box-shadow: var(--shadow);
-    min-height: 1056px; /* Alto estándar de hoja carta a 96 DPI */
+    min-height: 1056px; /* Alto carta a 96 DPI */
     position: relative;
     overflow: hidden;
 }
@@ -116,15 +111,17 @@ body {
     print-color-adjust: exact;
 }
 
-/* --- ESTILOS PARA EL EFECTO DE FOTO / GIF --- */
+/* --- ESTILOS DE FOTO / GIF CON EFECTO HOVER --- */
 .photo-frame-round {
     width: 140px;
     height: 140px;
     border: 4px solid rgba(255,255,255,0.2);
     border-radius: 50%;
     margin: 0 auto 15px;
-    overflow: hidden;
+    overflow: hidden; /* Recorte circular estricto */
     background: #eee;
+    /* Corrección para navegadores Webkit (Safari/Chrome) */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
 .photo-container {
@@ -141,26 +138,39 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Asegura escalado correcto sin deformar */
     border-radius: 50%;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s ease, visibility 0.4s;
 }
 
 .profile-gif {
     opacity: 0;
+    visibility: hidden;
+    z-index: 2;
 }
 
+.profile-photo {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+}
+
+/* Efectos al pasar el ratón */
 .photo-frame-round:hover .photo-container {
     transform: scale(1.08);
 }
 
 .photo-frame-round:hover .profile-photo {
     opacity: 0;
+    visibility: hidden;
 }
 
 .photo-frame-round:hover .profile-gif {
     opacity: 1;
+    visibility: visible;
 }
+
+/* -------------------------------------------- */
 
 .user-name-sidebar {
     text-align: center;
@@ -392,11 +402,12 @@ body {
     
     .no-print { display: none !important; }
 
+    /* Forzamos imagen estática en impresión */
     .profile-gif { display: none !important; }
-    .profile-photo { opacity: 1 !important; }
+    .profile-photo { opacity: 1 !important; visibility: visible !important; }
     .photo-container { transform: none !important; }
 
-    /* Ajuste para forzar el encaje en una sola página si es posible */
+    /* Ajuste para intentar que todo quepa en una página */
     #experience-timeline .timeline-item:nth-child(n+4) {
         display: none !important;
     }
