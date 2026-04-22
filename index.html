@@ -29,12 +29,11 @@
         </button>
     </nav>
 
-    <div class="cv-wrapper">
+    <div class="cv-wrapper" id="main-cv-wrapper">
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="profile-container">
                 <div class="photo-frame-round">
-                    <!-- Contenedor optimizado para el efecto GIF y escalado correcto -->
                     <div class="photo-container">
                         <img src="Public/images/Picture.webp" alt="Jonathan Mosquera" class="profile-photo" onerror="this.src='https://via.placeholder.com/160?text=JM'">
                         <img src="Public/images/Picture.gif" alt="Jonathan GIF" class="profile-gif">
@@ -119,9 +118,10 @@
         const data = {
             software: {
                 es: {
-                    role: "Senior Full Stack Developer | Industrial Data Architect",
-                    summary: "Ingeniero Mecánico y Desarrollador especializado en soluciones industriales escalables. Experto en Clean Architecture y transformación de flujos operativos complejos en ecosistemas digitales eficientes con enfoque en Big Data industrial. Versatilidad probada en automatización mediante VBA/Excel y gestión de proyectos técnicos.",
+                    role: "Junior Full Stack Developer | Industrial Data Architect",
+                    summary: "Ingeniero Mecánico y Desarrollador Junior enfocado en la creación de soluciones industriales escalables. Especializado en Clean Architecture y en la transformación de flujos operativos complejos en ecosistemas digitales eficientes. Con una sólida base técnica en Big Data industrial, automatización mediante VBA/Excel y una gran capacidad de aprendizaje para el despliegue de tecnologías modernas.",
                     exp: [
+                        { t: "Fundador & Arquitecto de Software", c: "Lethan Soluciones", d: "2018 - 2021", url: "https://lethansoluciones.com", tasks: ["Diseño y arquitectura de ecosistemas digitales a medida.", "Digitalización de procesos de ingeniería y optimización operativa."] },
                         { t: "Sistema DMEPS", c: "Health Monitoring System", d: "2023 - 2024", url: "https://dmeps.com", tasks: ["Desarrollo de monitoreo para EPS (Savia Salud, Nueva EPS).", "Implementación de métricas financieras y técnico-científicas."] },
                         { t: "Aevoid.com", c: "Aethereum", d: "2022 - Actual", url: "https://aevoid.com", tasks: ["Plataforma de productividad basada en IA.", "Diseño y despliegue en Next.js y Vercel."] },
                         { t: "Buda ERP", c: "Sistemas Industriales", d: "2021 - 2023", url: "#", tasks: ["Arquitectura de módulos de ingeniería de troqueles.", "Optimización de corte mediante algoritmos de materiales."] },
@@ -129,9 +129,10 @@
                     ]
                 },
                 en: {
-                    role: "Senior Full Stack Developer | Industrial Data Architect",
-                    summary: "Mechanical Engineer and Developer specialized in scalable industrial solutions. Expert in Clean Architecture and transforming complex operational flows into efficient digital ecosystems with an industrial Big Data focus. Proven versatility in VBA/Excel automation and technical project management.",
+                    role: "Junior Full Stack Developer | Industrial Data Architect",
+                    summary: "Mechanical Engineer and Junior Developer focused on creating scalable industrial solutions. Specialized in Clean Architecture and transforming complex operational flows into efficient digital ecosystems. With a solid technical foundation in industrial Big Data, VBA/Excel automation, and a high learning capacity for deploying modern technologies.",
                     exp: [
+                        { t: "Founder & Software Architect", c: "Lethan Soluciones", d: "2018 - 2021", url: "https://lethansoluciones.com", tasks: ["Design and architecture of custom digital ecosystems.", "Digitalization of engineering processes and operational optimization."] },
                         { t: "DMEPS System", c: "Health Monitoring System", d: "2023 - 2024", url: "https://dmeps.com", tasks: ["Monitoring system development for Health Entities (Savia Salud, Nueva EPS).", "Implementation of financial and technical-scientific metrics."] },
                         { t: "Aevoid.com", c: "Aethereum", d: "2022 - Present", url: "https://aevoid.com", tasks: ["AI-based productivity platform.", "Design and deployment using Next.js and Vercel."] },
                         { t: "Buda ERP", c: "Industrial Systems", d: "2021 - 2023", url: "#", tasks: ["Architecture of die engineering modules.", "Cutting optimization via material algorithms."] },
@@ -142,7 +143,7 @@
             operaciones: {
                 es: {
                     role: "Ingeniero de Operaciones | Project Manager",
-                    summary: "Ingeniero Mecánico experto en dirección de proyectos industriales y optimización operativa. Especialista en liderar equipos técnicos y aplicar metodologías Lean. Domina herramientas avanzadas de Project Management y automatización en Office para maximizar la productividad y seguridad.",
+                    summary: "Ingeniero Mecánico con enfoque en la dirección de proyectos industriales y optimización operativa. Especialista en liderar equipos técnicos y aplicar metodologías Lean. Domina herramientas de Project Management y automatización en Office para maximizar la productividad y seguridad.",
                     exp: [
                         { t: "Director Comercial / Técnico", c: "Soluciones Industriales GYP", d: "2021 - 2024", url: "#", tasks: ["Liderazgo técnico en proyectos con Hitachi Energy y Suzuki.", "Optimización de procesos de mantenimiento y montaje."] },
                         { t: "Ingeniero Residente", c: "Ingeniería de Pereira (Bioenergy)", d: "2016 - 2018", url: "#", tasks: ["Supervisión de cuadrillas de 30+ operarios.", "Control de Dossier de calidad e interpretación de isométricos."] },
@@ -151,9 +152,9 @@
                 },
                 en: {
                     role: "Operations Engineer | Project Manager",
-                    summary: "Mechanical Engineer expert in industrial project management and operational optimization. Specialist in leading technical teams and applying Lean methodologies. Mastery of advanced Project Management tools and Office automation to maximize productivity and safety.",
+                    summary: "Mechanical Engineer with a focus on industrial project management and operational optimization. Specialist in leading technical teams and applying Lean methodologies. Mastery of Project Management tools and Office automation to maximize productivity and safety.",
                     exp: [
-                        { t: "Commercial / Technical Director", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Technical leadership for projects with Hitachi Energy y Suzuki.", "Optimization of maintenance and assembly processes."] },
+                        { t: "Commercial / Technical Director", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Technical leadership for projects with Hitachi Energy and Suzuki.", "Optimization of maintenance and assembly processes."] },
                         { t: "Resident Engineer", c: "Ingeniería de Pereira (Bioenergy)", d: "2016 - 2018", url: "#", tasks: ["Supervision of 30+ operators crews.", "Quality Dossier control and isometric drawing interpretation."] },
                         { t: "Resident Engineer", c: "Industrias del Pacífico", d: "2015 - 2019", url: "#", tasks: ["Assembly of tanks and certified metallic structures.", "Assurance of welding standards and industrial safety."] }
                     ]
@@ -181,14 +182,14 @@
 
         const staticData = {
             es: {
-                skills: ["VBA / Excel Avanzado", "Project Management", "Office / MS Project", "React / Next.js", "SolidWorks / SAP", "Clean Architecture"],
+                skills: ["TypeScript / JS / Python", "React / Next.js", "Clean Architecture", "VBA / Excel Avanzado", "Project Management", "SolidWorks / SAP", "Dibujante Técnico"],
                 sena: ["Java & PHP Web (Dic 2020)", "Prog. C++ (Nov 2020)", "Admón. RRHH (Dic 2020)", "Solid Edge (Jul 2012)"],
                 edu: [{ t: "Ingeniería Mecánica", c: "Univ. Tecnológica de Pereira", d: "Graduado", desc: "Enfoque en optimización de procesos industriales." }],
                 titles: { contact: "Contacto", projects: "Proyectos", skills: "Aptitudes", sena: "Formación SENA", exp: "Trayectoria Profesional", edu: "Estudios Superiores" },
                 goPage: "Ir a página"
             },
             en: {
-                skills: ["VBA / Advanced Excel", "Project Management", "Office / MS Project", "React / Next.js", "SolidWorks / SAP", "Clean Architecture"],
+                skills: ["TypeScript / JS / Python", "React / Next.js", "Clean Architecture", "VBA / Advanced Excel", "Project Management", "SolidWorks / SAP", "Technical Sketching"],
                 sena: ["Java & PHP Web (Dec 2020)", "C++ Programming (Nov 2020)", "HR Admin (Dec 2020)", "Solid Edge (Jul 2012)"],
                 edu: [{ t: "Mechanical Engineering", c: "UTP University", d: "Graduated", desc: "Focus on industrial process optimization." }],
                 titles: { contact: "Contact", projects: "Projects", skills: "Skills", sena: "SENA Training", exp: "Professional Experience", edu: "Higher Education" },
@@ -200,22 +201,27 @@
             const p = data[currentProfile][currentLang];
             const s = staticData[currentLang];
 
+            // Renderizado de textos principales
             document.getElementById('dynamic-role').innerText = p.role;
             document.getElementById('dynamic-summary').innerText = p.summary;
             
+            // Actualización de títulos
             Object.keys(s.titles).forEach(id => {
                 const el = document.getElementById(`title-${id}`);
                 if(el) el.innerText = s.titles[id];
             });
 
+            // Renderizado de habilidades
             document.getElementById('skills-container').innerHTML = s.skills.map(skill => `
                 <div class="skill-item">
                     <div class="skill-name"><span>${skill}</span></div>
                     <div class="progress-bg"><div class="progress-fill" style="width: 90%"></div></div>
                 </div>`).join('');
 
+            // SENA
             document.getElementById('sena-list').innerHTML = s.sena.map(item => `<li>${item}</li>`).join('');
 
+            // Experiencia
             document.getElementById('experience-timeline').innerHTML = p.exp.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -232,6 +238,7 @@
                     ${(e.url && e.url !== "#") ? `<a href="${e.url}" target="_blank" class="exp-link"><i class="fas fa-external-link-alt"></i> ${s.goPage}</a>` : ''}
                 </div>`).join('');
 
+            // Educación
             document.getElementById('education-timeline').innerHTML = s.edu.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -256,17 +263,32 @@
             render();
         }
 
+        // Función de impresión
         function handlePrint() {
             window.focus();
             window.print();
         }
 
+        function adjustMobileScale() {
+            const wrapperWidth = 816; // Ancho base tamaño carta
+            const screenWidth = window.innerWidth;
+            const margin = 10; // 5px a cada lado (total 10px)
+            
+            if(screenWidth < wrapperWidth + margin) {
+                // Cálculo de escala para que quepa en el ancho de pantalla menos los márgenes
+                const scale = (screenWidth - margin) / wrapperWidth;
+                document.querySelector('meta[name="viewport"]').setAttribute("content", `width=${wrapperWidth}, initial-scale=${scale.toFixed(3)}, maximum-scale=${scale.toFixed(3)}, user-scalable=no`);
+            } else {
+                document.querySelector('meta[name="viewport"]').setAttribute("content", "width=device-width, initial-scale=1.0");
+            }
+        }
+
         window.onload = () => {
             render();
-            if(window.innerWidth < 850) {
-                document.querySelector('meta[name="viewport"]').setAttribute("content", "width=850, initial-scale=0.4");
-            }
+            adjustMobileScale();
         };
+
+        window.onresize = adjustMobileScale;
     </script>
 </body>
 </html>

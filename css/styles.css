@@ -24,7 +24,11 @@ body {
     font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     background-color: #f4f7f6;
     color: var(--text-dark);
-    line-height: 1.4; /* Ajuste para optimizar espacio en tamaño carta */
+    line-height: 1.4;
+    /* Asegura que el contenido se centre cuando se escala en móviles */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* ================================================================
@@ -87,7 +91,7 @@ body {
 }
 
 /* ================================================================
-   ESTRUCTURA PRINCIPAL (AJUSTE TAMAÑO CARTA)
+   ESTRUCTURA PRINCIPAL (TAMAÑO CARTA)
    ================================================================ */
 .cv-wrapper {
     width: 816px; /* Ancho carta a 96 DPI */
@@ -99,6 +103,8 @@ body {
     min-height: 1056px; /* Alto carta a 96 DPI */
     position: relative;
     overflow: hidden;
+    /* Garantiza centrado horizontal */
+    flex-shrink: 0;
 }
 
 /* SIDEBAR */
@@ -111,16 +117,16 @@ body {
     print-color-adjust: exact;
 }
 
-/* --- ESTILOS DE FOTO / GIF CON EFECTO HOVER --- */
+/* --- ESTILOS DE FOTO / GIF --- */
 .photo-frame-round {
     width: 140px;
     height: 140px;
     border: 4px solid rgba(255,255,255,0.2);
     border-radius: 50%;
     margin: 0 auto 15px;
-    overflow: hidden; /* Recorte circular estricto */
+    overflow: hidden;
     background: #eee;
-    /* Corrección para navegadores Webkit (Safari/Chrome) */
+    /* Corrección de recorte circular para Webkit */
     -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
@@ -138,7 +144,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Asegura escalado correcto sin deformar */
+    object-fit: cover;
     border-radius: 50%;
     transition: opacity 0.4s ease, visibility 0.4s;
 }
@@ -155,7 +161,7 @@ body {
     z-index: 1;
 }
 
-/* Efectos al pasar el ratón */
+/* Efectos Hover */
 .photo-frame-round:hover .photo-container {
     transform: scale(1.08);
 }
@@ -169,8 +175,6 @@ body {
     opacity: 1;
     visibility: visible;
 }
-
-/* -------------------------------------------- */
 
 .user-name-sidebar {
     text-align: center;
@@ -397,18 +401,18 @@ body {
     body { 
         background: white !important; 
         -webkit-print-color-adjust: exact !important; 
-        print-color-adjust: exact !important; 
+        print-color-adjust: exact !important;
+        display: block !important;
     }
     
     .no-print { display: none !important; }
 
-    /* Forzamos imagen estática en impresión */
     .profile-gif { display: none !important; }
     .profile-photo { opacity: 1 !important; visibility: visible !important; }
     .photo-container { transform: none !important; }
 
-    /* Ajuste para intentar que todo quepa en una página */
-    #experience-timeline .timeline-item:nth-child(n+4) {
+    /* Ajuste para que todo quepa en una página */
+    #experience-timeline .timeline-item:nth-child(n+5) {
         display: none !important;
     }
 
