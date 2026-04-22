@@ -29,7 +29,7 @@
         </button>
     </nav>
 
-    <div class="cv-wrapper" id="main-cv-wrapper">
+    <div class="cv-wrapper">
         <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="profile-container">
@@ -269,26 +269,9 @@
             window.print();
         }
 
-        function adjustMobileScale() {
-            const wrapperWidth = 816; // Ancho base tamaño carta
-            const screenWidth = window.innerWidth;
-            const margin = 10; // 5px a cada lado
-            
-            if(screenWidth < wrapperWidth + margin) {
-                // Cálculo de escala preciso para centrado
-                const scale = (screenWidth - margin) / wrapperWidth;
-                document.querySelector('meta[name="viewport"]').setAttribute("content", `width=${wrapperWidth}, initial-scale=${scale.toFixed(4)}, maximum-scale=${scale.toFixed(4)}, user-scalable=no`);
-            } else {
-                document.querySelector('meta[name="viewport"]').setAttribute("content", "width=device-width, initial-scale=1.0");
-            }
-        }
-
         window.onload = () => {
             render();
-            adjustMobileScale();
         };
-
-        window.onresize = adjustMobileScale;
     </script>
 </body>
 </html>
