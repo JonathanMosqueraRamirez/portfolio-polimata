@@ -3,324 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JONATHAN MOSQUERA | POLIMATA DOSSIER</title>
-    
-    <!-- Vínculo al archivo de estilos local -->
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Recursos Externos (Tailwind, Iconos, Fuentes) -->
+    <title>Jonathan Mosquera - Portafolio Polímata</title>
+    <!-- Tailwind CSS para la estructura y responsividad -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Vinculación al archivo de estilos externo -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="blueprint-bg">
+<body>
 
-    <!-- Indicador de Scroll Global - Solo visible en Escritorio -->
-    <div id="global-scroll-track" class="hidden md:block"></div>
-    <div id="global-scroll-thumb" class="hidden md:block"></div>
+    <!-- Menú de Navegación Superior (Oculto en Impresión) -->
+    <nav class="nav-header no-print sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b p-3 flex overflow-x-auto gap-2 justify-start lg:justify-center">
+        <button onclick="updateView('ingenieria')" id="btn-ingenieria" class="btn-nav px-4 py-2 rounded text-[11px] font-bold bg-gray-100 hover:bg-gray-200 transition-colors whitespace-nowrap">ingeniería_operaciones</button>
+        <button onclick="updateView('software')" id="btn-software" class="btn-nav px-4 py-2 rounded text-[11px] font-bold bg-gray-100 hover:bg-gray-200 transition-colors whitespace-nowrap">Software engennier</button>
+        <button onclick="updateView('consultor')" id="btn-consultor" class="btn-nav px-4 py-2 rounded text-[11px] font-bold bg-gray-100 hover:bg-gray-200 transition-colors whitespace-nowrap">Consultor Hibrido</button>
+        <button onclick="toggleLanguage()" id="btn-lang" class="px-4 py-2 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition-colors whitespace-nowrap">Es | En</button>
+        <button onclick="window.print()" class="px-4 py-2 rounded text-[11px] font-bold bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-md whitespace-nowrap">Imprimir pdf</button>
+    </nav>
 
-    <!-- Encabezado Responsivo -->
-    <header class="fixed top-0 w-full z-50 bg-white/95 border-b-[4px] border-black px-4 md:px-6 py-4 md:py-5">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-3 md:gap-5">
-                <div class="bg-black text-white w-9 h-9 md:w-11 md:h-11 flex items-center justify-center font-bold text-lg md:text-2xl relative">
-                    P <div class="absolute -top-1 -right-1 w-2 h-2 md:w-2.5 md:h-2.5 bg-cobalt"></div>
-                </div>
-                <div>
-                    <h2 class="text-sm md:text-base font-bold uppercase tracking-widest leading-none">J. Mosquera</h2>
-                    <p class="text-[10px] md:text-[12px] font-mono text-cobalt tracking-[0.2em] md:tracking-[0.4em] uppercase font-bold italic" data-i18n="system-auth">Auth: Polimata_v11</p>
-                </div>
-            </div>
-            
-            <!-- Nav Escritorio -->
-            <nav class="hidden md:flex gap-4 text-tiny font-bold uppercase tracking-[0.4em] items-center">
-                <a href="#dossier" class="nav-item hover:text-cobalt transition-colors" data-i18n="nav-dossier">01.Dossier</a>
-                <a href="#trayectoria" class="nav-item hover:text-cobalt transition-colors" data-i18n="nav-history">02.History</a>
-                <a href="#stack" class="nav-item hover:text-cobalt transition-colors" data-i18n="nav-stack">03.Stack</a>
-                <div class="h-4 w-[1px] bg-black/20 mx-1"></div>
-                <button id="lang-toggle" class="font-mono text-[10px] font-bold px-3 py-1 border border-black/10 hover:border-cobalt transition-all min-w-[80px]">
-                    ES | EN
-                </button>
-            </nav>
-
-            <!-- Botón Hamburguesa Móvil -->
-            <button id="menu-open" class="md:hidden text-2xl p-2 focus:outline-none">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <a href="mailto:jmosquera.ing@email.com" class="text-tiny font-bold border border-black px-4 py-2 hover:bg-black hover:text-white transition-all uppercase tracking-widest hidden lg:block" data-i18n="connect-btn">Connect_System</a>
-        </div>
-    </header>
-
-    <!-- Menú Móvil Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-[100] bg-white hidden flex-col transition-all duration-300">
-        <div class="p-6 flex justify-between items-center border-b-[4px] border-black">
-            <div class="flex items-center gap-3">
-                <div class="bg-black text-white w-9 h-9 flex items-center justify-center font-bold text-lg">M</div>
-                <span class="font-bold tracking-widest uppercase text-sm">System_Menu</span>
-            </div>
-            <button id="menu-close" class="text-3xl p-2"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="flex-grow flex flex-col justify-center items-center gap-10 p-6 overflow-y-auto">
-            <div class="tech-corner tc-tl !left-6 !top-24"></div>
-            <nav class="flex flex-col gap-8 text-center">
-                <a href="#dossier" class="mobile-nav-link text-4xl font-bold uppercase tracking-tighter" data-i18n="nav-dossier">01.Dossier</a>
-                <a href="#trayectoria" class="mobile-nav-link text-4xl font-bold uppercase tracking-tighter" data-i18n="nav-history">02.History</a>
-                <a href="#stack" class="mobile-nav-link text-4xl font-bold uppercase tracking-tighter" data-i18n="nav-stack">03.Stack</a>
-            </nav>
-            <div class="w-full max-w-xs h-[1px] bg-black/10"></div>
-            <div class="flex flex-col gap-6 items-center w-full">
-                <button id="lang-toggle-mobile" class="font-mono text-xs font-bold px-6 py-3 border-2 border-cobalt text-cobalt uppercase tracking-widest w-full max-w-xs">
-                    Change_Language (ES/EN)
-                </button>
-                <a href="mailto:jmosquera.ing@email.com" class="bg-black text-white px-6 py-4 text-center font-bold uppercase tracking-[0.2em] w-full max-w-xs" data-i18n="connect-btn">Connect_System</a>
-            </div>
-            <div class="tech-corner tc-br !right-6 !bottom-6"></div>
-        </div>
-    </div>
-
-    <!-- Sección Hero -->
-    <section class="min-h-screen flex items-center px-6 pt-24 md:pt-32" id="dossier">
-        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center">
-            <div class="lg:col-span-7">
-                <div class="text-cobalt font-mono text-tiny tracking-[0.4em] md:tracking-[0.6em] mb-4 md:mb-8 reveal active uppercase font-bold italic border-l-2 border-cobalt pl-4" data-i18n="hero-tag">System_Interface_Initialized</div>
-                <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-[0.9] md:leading-[0.8] mb-8 md:mb-12 reveal active uppercase">
-                    POLI<br><span class="text-cobalt" data-i18n="hero-title">MATA</span>
-                </h1>
-                <p class="text-lg md:text-3xl font-light leading-snug max-w-2xl opacity-80 reveal active italic border-l-4 border-black pl-6 md:pl-8 min-h-0 md:min-h-[120px]" data-i18n="hero-desc">
-                    La precisión de la <span class="text-black font-bold uppercase underline decoration-cobalt decoration-4 underline-offset-8">Ingeniería Mecánica</span> sincronizada con <span class="text-cobalt font-bold uppercase font-mono">Arquitectura Digital</span>.
-                </p>
-            </div>
-            
-            <div class="lg:col-span-5 flex justify-center lg:justify-end reveal active mt-10 lg:mt-0">
-                <div class="premium-frame p-3 md:p-4 relative group shadow-2xl">
-                    <div class="tech-corner tc-tl"></div>
-                    <div class="tech-corner tc-br"></div>
-                    <div class="relative overflow-hidden">
-                        <div class="scanner-line"></div>
-                        <img src="Public/images/Picture.webp" alt="Profile" class="w-full max-w-[240px] sm:max-w-[280px] md:max-w-[360px] brightness-90 contrast-110 block">
-                    </div>
-                    <div class="absolute -bottom-6 -left-6 md:-bottom-8 md:-left-8 bg-black text-white p-4 md:p-6 shadow-2xl">
-                        <p class="text-[10px] md:text-tiny font-mono text-cobalt tracking-[0.3em] md:tracking-[0.5em] mb-1 md:mb-2 uppercase italic font-bold" data-i18n="profile-label">Verified_Identity</p>
-                        <p class="text-sm md:text-base font-bold tracking-widest uppercase">QN230 110563 ACIEM</p>
+    <div class="cv-page" id="cv-root">
+        
+        <!-- BARRA LATERAL (Sidebar Azul) -->
+        <aside class="sidebar">
+            <div class="flex flex-col items-center mb-8">
+                <!-- Marco de Foto Circular -->
+                <div class="photo-container w-32 h-32 lg:w-40 lg:h-40 rounded-full border-4 border-white/20 bg-white/10 flex items-center justify-center overflow-hidden mb-4 relative group">
+                    <img src="Public/images/Picture.webp" alt="Jonathan Mosquera" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="hidden absolute inset-0 items-center justify-center text-center">
+                        <span class="text-[10px] text-white/50 uppercase tracking-tighter">Jonathan<br>Mosquera R.</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Banners de Impacto -->
-    <section class="py-20 md:py-28 bg-black text-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div class="impact-banner p-8 md:p-10 reveal">
-                <span class="text-cobalt font-mono text-tiny tracking-[0.4em] block mb-6 uppercase font-bold italic" data-i18n="impact-1-label">Process_Efficiency</span>
-                <h3 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4">-70%</h3>
-                <p class="text-tiny font-light opacity-50 uppercase tracking-[0.3em] leading-relaxed italic" data-i18n="impact-1-desc">Optimización <span class="text-white font-bold">SAP & MAXIMO</span>.</p>
-            </div>
-            <div class="impact-banner p-8 md:p-10 reveal">
-                <span class="text-cobalt font-mono text-tiny tracking-[0.4em] block mb-6 uppercase font-bold italic" data-i18n="impact-2-label">Automation_Core</span>
-                <h3 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4">100%</h3>
-                <p class="text-tiny font-light opacity-50 uppercase tracking-[0.3em] leading-relaxed italic" data-i18n="impact-2-desc">Precisión en <span class="text-white font-bold">Nóminas & KPIs</span>.</p>
-            </div>
-            <div class="impact-banner p-8 md:p-10 reveal">
-                <span class="text-cobalt font-mono text-tiny tracking-[0.4em] block mb-6 uppercase font-bold italic" data-i18n="impact-3-label">Lead_Control</span>
-                <h3 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-4">+30</h3>
-                <p class="text-tiny font-light opacity-50 uppercase tracking-[0.3em] leading-relaxed italic" data-i18n="impact-3-desc">Gestión en <span class="text-white font-bold">Planta Industrial</span>.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Trayectoria -->
-    <section class="py-20 md:py-32 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20" id="trayectoria">
-        <div class="lg:col-span-8 space-y-10 md:space-y-12 relative">
-            <h2 class="text-4xl md:text-6xl font-bold tracking-tighter uppercase italic" data-i18n="history-title">History <span class="text-cobalt">Dossier</span></h2>
-            
-            <div class="exp-scroll-track hidden md:block" id="exp-scroll-track"></div>
-            <div id="exp-scroll-thumb" class="hidden md:block"></div>
-            
-            <div id="exp-container" class="h-auto md:h-[700px] overflow-y-visible md:overflow-y-auto pr-0 md:pr-12 space-y-12 md:space-y-20">
-                <!-- Item 1 -->
-                <div class="premium-frame p-6 md:p-10 group border-l-4 border-cobalt">
-                    <div class="flex flex-col md:flex-row justify-between mb-6 text-tiny">
-                        <div>
-                            <h3 class="text-2xl md:text-3xl font-bold uppercase tracking-tight group-hover:text-cobalt transition-colors" data-i18n="exp1-role">Ingeniero Soporte IT</h3>
-                            <p class="text-gray-400 font-bold tracking-[0.3em] uppercase mt-2 italic" data-i18n="exp1-company">Hitachi Energy (ABB)</p>
-                        </div>
-                        <span class="text-cobalt font-mono font-bold border border-cobalt/20 px-4 py-1.5 self-start mt-4 md:mt-0 italic">2023 — 2024</span>
-                    </div>
-                    <ul class="text-base md:text-lg font-light leading-relaxed space-y-3 opacity-80 italic border-l-2 border-cobalt/20 pl-4" data-i18n="exp1-desc">
-                        <li>• Algoritmos lógicos para cálculo de horas extras y recargos.</li>
-                        <li>• Dashboards Kanban para control de piso en tiempo real.</li>
+            <div class="space-y-6">
+                <!-- Contacto -->
+                <section>
+                    <h3 class="sidebar-label" id="lbl-contact">Contacto</h3>
+                    <ul class="text-[10px] lg:text-[11px] space-y-3 opacity-95">
+                        <li class="flex items-start gap-2">
+                            <span class="w-4 text-center">📍</span>
+                            <span>Carrera 8 #25-21 Barrio el Bohiho,<br>Dosquebradas, Risaralda</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-4 text-center">📞</span>
+                            <span>3234957229</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-4 text-center">✉️</span>
+                            <span class="break-all">ing.jonathanmosquera@gmail.com</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <span class="w-4 text-center">📄</span>
+                            <span>Matrícula: QN230 110563</span>
+                        </li>
                     </ul>
-                </div>
+                </section>
 
-                <!-- Item 2 -->
-                <div class="premium-frame p-6 md:p-10 group border-l-4 border-black bg-gray-50/40">
-                    <div class="flex flex-col md:flex-row justify-between mb-6 text-tiny">
-                        <div>
-                            <h3 class="text-2xl md:text-3xl font-bold uppercase tracking-tight text-cobalt italic" data-i18n="exp2-role">Trazas Ingeniería</h3>
-                            <p class="text-gray-400 font-bold tracking-[0.3em] uppercase mt-2" data-i18n="exp2-company">Diseño & Interventoría</p>
-                        </div>
-                        <span class="text-gray-400 font-mono border border-black/10 px-4 py-1.5 self-start mt-4 md:mt-0 italic">Sync_Record</span>
-                    </div>
-                    <div class="text-base md:text-lg font-light leading-relaxed opacity-85 italic border-l-2 border-black/10 pl-4 space-y-4" data-i18n="exp2-desc">
-                        <p>> Levantamientos técnicos y diseño de piezas industriales de alta precisión.</p>
-                        <p>> Aseguramiento de calidad en planos arquitectónicos y mecánicos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <!-- Aptitudes -->
+                <section>
+                    <h3 class="sidebar-label" id="lbl-skills">Aptitudes</h3>
+                    <ul id="skills-list" class="text-[10px] lg:text-[11px] space-y-1.5 list-disc pl-4 opacity-95">
+                        <!-- Dinámico -->
+                    </ul>
+                </section>
 
-        <!-- Sidebar Stack -->
-        <aside id="stack" class="lg:col-span-4 space-y-8 md:space-y-10 self-start text-tiny">
-            <div class="premium-frame p-8 md:p-10 bg-black text-white shadow-xl uppercase font-mono tracking-widest">
-                <h4 class="text-cobalt font-bold mb-8 italic text-center md:text-left" data-i18n="stack-title-1">Core_Software_Stack</h4>
-                <div class="space-y-5">
-                    <p class="flex justify-between border-b border-white/10 pb-2">JAVA / C++ <i class="fas fa-check text-cobalt"></i></p>
-                    <p class="flex justify-between border-b border-white/10 pb-2">VBA MACROS <i class="fas fa-check text-cobalt"></i></p>
-                    <p class="flex justify-between border-b border-white/10 pb-2">SQL / PHP <i class="fas fa-check text-cobalt"></i></p>
-                </div>
+                <!-- Idiomas -->
+                <section>
+                    <h3 class="sidebar-label" id="lbl-lang-title">Idiomas</h3>
+                    <div class="text-[11px] space-y-1 opacity-95">
+                        <p><strong id="lbl-es">Español:</strong> <span id="val-es">Nativo</span></p>
+                        <p><strong id="lbl-en">Inglés:</strong> <span id="val-en">Intermedio (B2)</span></p>
+                    </div>
+                </section>
+
+                <!-- Educación -->
+                <section>
+                    <h3 class="sidebar-label" id="lbl-edu">Educación</h3>
+                    <div class="text-[11px] opacity-95">
+                        <p class="font-bold">Ingeniería Mecánica</p>
+                        <p>Univ. Tecnológica de Pereira (UTP)</p>
+                    </div>
+                </section>
             </div>
-            
-            <div class="premium-frame p-8 md:p-10 font-bold uppercase tracking-widest">
-                <h4 class="text-black mb-8 italic text-center md:text-left" data-i18n="stack-title-2">Mechanical_Forge</h4>
-                <div class="space-y-5">
-                    <p class="flex justify-between border-b border-black/5 pb-2">SOLIDWORKS <span class="text-cobalt">PRO</span></p>
-                    <p class="flex justify-between border-b border-black/5 pb-2">AUTOCAD <span class="text-cobalt">ADV</span></p>
-                </div>
+
+            <div class="mt-auto pt-10 text-center opacity-30 text-[9px] uppercase tracking-[0.3em]">
+                Portafolio Polímata
             </div>
         </aside>
-    </section>
 
-    <!-- Footer -->
-    <footer class="bg-black text-white pt-24 md:pt-40 pb-16 md:pb-20 px-6 md:px-8 text-tiny font-mono tracking-widest uppercase opacity-80">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-20">
-            <div>
-                <h2 class="text-5xl sm:text-7xl md:text-9xl font-bold tracking-tighter italic mb-8 md:mb-10 uppercase">J. Mosquera<br><span class="text-cobalt">Ramirez</span></h2>
-                <p class="font-bold opacity-30 tracking-[0.4em] md:tracking-[0.6em] text-[10px] md:text-tiny" data-i18n="footer-system">Polimata_System_v11</p>
-            </div>
-            <div class="space-y-8 md:space-y-10">
-                <p class="text-cobalt font-bold tracking-[0.4em]" data-i18n="footer-access">Direct_Access</p>
-                <div class="space-y-4 text-xl md:text-2xl font-light tracking-tight">
-                    <p><a href="tel:+573234957229" class="hover:text-cobalt transition-colors">+57 323 495 7229</a></p>
-                    <p><a href="mailto:jmosquera.ing@email.com" class="hover:text-cobalt transition-colors underline decoration-cobalt underline-offset-[12px]">jmosquera.ing@email.com</a></p>
+        <!-- CONTENIDO PRINCIPAL (Timeline Vertical) -->
+        <main class="main-content">
+            <header class="mb-10">
+                <h1 class="text-4xl lg:text-5xl font-black tracking-tighter text-gray-800 leading-none">JONATHAN<br>MOSQUERA R.</h1>
+                <p id="current-title" class="text-base lg:text-lg font-bold text-gray-500 mt-2 uppercase tracking-[0.15em] border-l-4 border-blue-900 pl-3">
+                    <!-- Dinámico -->
+                </p>
+            </header>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <!-- SECCIÓN: PERFIL (Icono Perfil) -->
+                <div class="timeline-item">
+                    <div class="timeline-icon bg-slate-800">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <div class="timeline-content">
+                        <h2 class="section-title-alt" id="lbl-profile">Perfil Profesional</h2>
+                        <p id="profile-desc" class="text-xs lg:text-sm text-gray-600 leading-relaxed text-justify"></p>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN: EXPERIENCIA (Icono Maletín) -->
+                <div class="timeline-item">
+                    <div class="timeline-icon bg-slate-800">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="18" height="18"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    </div>
+                    <div class="timeline-content">
+                        <h2 class="section-title-alt" id="lbl-exp">Experiencia Laboral</h2>
+                        
+                        <!-- Contenedor Scroll Vertical para Experiencia -->
+                        <div id="experience-scroll-container" class="exp-scroll-area">
+                            <div id="experience-container" class="space-y-6 pr-2">
+                                <!-- Cargado dinámicamente -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN: FORMACIÓN (Icono Birrete) -->
+                <div class="timeline-item">
+                    <div class="timeline-icon bg-slate-800">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="18" height="18"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+                    </div>
+                    <div class="timeline-content">
+                        <h2 class="section-title-alt" id="lbl-sena">Formación Complementaria SENA</h2>
+                        <div id="sena-container" class="grid grid-cols-1 gap-3">
+                            <!-- Dinámico -->
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
 
-    <!-- Lógica de Programación Optimizada -->
+            <!-- Proyectos Destacados -->
+            <section class="mt-8 pt-4 border-t border-gray-100">
+                <h2 class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-4" id="lbl-projects">Proyectos Especiales</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="project-card-interactive p-3 bg-gray-50 border rounded-lg hover:shadow-md transition-all">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-[11px] font-bold text-blue-900">AEVOID.COM</h4>
+                            <a href="https://www.aevoid.com" target="_blank" class="text-blue-600 no-print">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-1 italic leading-tight" id="txt-aevoid"></p>
+                    </div>
+                    <div class="project-card-interactive p-3 bg-gray-50 border rounded-lg hover:shadow-md transition-all">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-[11px] font-bold text-blue-900">LETHAN SOLUCIONES</h4>
+                            <a href="https://www.lethansoluciones.com" target="_blank" class="text-blue-600 no-print">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-1 italic leading-tight" id="txt-lethan"></p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Script de Datos e Interactividad -->
     <script>
-        const translations = {
+        const db = {
             es: {
-                "system-auth": "Auth: Polimata_v11",
-                "nav-dossier": "01.Dossier",
-                "nav-history": "02.Trayectoria",
-                "nav-stack": "03.Stack",
-                "connect-btn": "Conectar_Sistema",
-                "hero-tag": "System_Interface_Initialized",
-                "hero-title": "MATA",
-                "hero-desc": "La precisión de la <span class='text-black font-bold uppercase underline decoration-cobalt decoration-4 underline-offset-8'>Ingeniería Mecánica</span> sincronizada con <span class='text-cobalt font-bold uppercase font-mono'>Arquitectura Digital</span>.",
-                "profile-label": "Identidad_Verificada",
-                "impact-1-label": "Eficiencia_Procesos",
-                "impact-1-desc": "Optimización <span class='text-white font-bold'>SAP & MAXIMO</span>.",
-                "impact-2-label": "Nucleo_Automatización",
-                "impact-2-desc": "Precisión en <span class='text-white font-bold'>Nóminas & KPIs</span>.",
-                "impact-3-label": "Control_Liderazgo",
-                "impact-3-desc": "Gestión en <span class='text-white font-bold'>Planta Industrial</span>.",
-                "history-title": "Dossier de <span class='text-cobalt'>Trayectoria</span>",
-                "exp1-role": "Ingeniero Soporte IT",
-                "exp1-company": "Hitachi Energy (ABB)",
-                "exp1-desc": "<li>• Algoritmos lógicos para cálculo de horas extras y recargos.</li><li>• Dashboards Kanban para control de piso en tiempo real.</li>",
-                "exp2-role": "Trazas Ingeniería",
-                "exp2-company": "Diseño & Interventoría",
-                "exp2-desc": "<p>> Levantamientos técnicos y diseño de piezas industriales de alta precisión.</p><p>> Aseguramiento de calidad en planos arquitectónicos y mecánicos.</p>",
-                "exp3-role": "Industrias Herval",
-                "exp3-company": "Ingeniero de Procesos",
-                "stack-title-1": "Stack_Software_Nucleo",
-                "stack-title-2": "Forja_Mecánica",
-                "footer-system": "Polimata_Sistema_v1",
-                "footer-access": "Acceso_Directo"
+                labels: {
+                    contact: "Contacto", skills: "Aptitudes", lang: "Idiomas", profile: "Perfil Profesional", exp: "Experiencia Laboral", 
+                    sena: "Formación SENA", projects: "Proyectos Destacados", edu: "Educación", es: "Español:", 
+                    en: "Inglés:", vEs: "Nativo", vEn: "Intermedio (B2)", aevoid: "Ecosistema de pensamiento sistémico e IA aplicada.",
+                    lethan: "Ingeniería estructural y fabricación digital en metal y madera."
+                },
+                roles: {
+                    ingenieria: {
+                        name: "Ingeniero de Operaciones & Proyectos",
+                        profile: "Ingeniero Mecánico (UTP) experto en optimización industrial y dirección de proyectos. Especialista en orquestar el flujo entre planta y administración mediante arquitecturas de datos masivas. Liderazgo de equipos técnicos de gran escala.",
+                        skills: ["Liderazgo de Equipos (30+)", "Gestión de Mantenimiento", "SolidWorks & AutoCAD", "Interpretación Planos Isométricos", "Control de Dossier de Calidad"],
+                        sena: ["Admin. de Recursos Humanos", "Manejo de SolidEdge", "Mantenimiento Industrial", "Salud Ocupacional"],
+                        exp: [
+                            { c: "Soluciones Industriales GYP", r: "Director Comercial / Soporte IT", d: "2021 - 2024", p: "Proyecto CONTROL DE REGISTROS: Arquitectura de datos para trazabilidad operativa de 30k registros para Hitachi Energy, Suzuki y Magnetron. Automatización de nómina." },
+                            { c: "Industrias Herval S.A.S", r: "Ingeniero de Trabajo en Campo", d: "2019", p: "Supervisión técnica y ejecución de proyectos de mantenimiento y montaje metalmecánico." },
+                            { c: "Ingeniería de Pereira S.A.S", r: "Ing. Residente / Gestor", d: "2016 - 2018", p: "Proyecto Bioenergy: Liderazgo de 30 personas en montaje mecánico y control técnico de obra en planta de Bioetanol." },
+                            { c: "Busscar de Colombia", r: "Ingeniero Residente de Línea", d: "2015", p: "Asesoría técnica en línea de ensamble y diseño/modificación de estándares de carrocería." },
+                            { c: "Univ. Tecnológica de Pereira", r: "Dibujante Mecánico", d: "2013 - 2014", p: "Desarrollo de planos técnicos y soporte en diseño mecánico asistido por computadora." }
+                        ]
+                    },
+                    software: {
+                        name: "Senior Full Stack Developer",
+                        profile: "Desarrollador enfocado en transformar la industria mediante software escalable, IA y Big Data. Especialista en arquitecturas limpias que optimizan la productividad operativa mediante el procesamiento masivo de datos.",
+                        skills: ["React / Next.js / TypeScript", "Node.js & PostgreSQL", "Arquitectura Clean / Screaming", "Integración de IA / Oráculos", "Cloud (Vercel/Firebase)"],
+                        sena: ["Desarrollo Java (2020)", "Desarrollo PHP (2020)", "Programación C++ (2020)", "Base de Datos SQL"],
+                        exp: [
+                            { c: "Aevoid.com", r: "Lead Developer / Founder", d: "2023 - Presente", p: "Diseño y despliegue de plataforma de productividad sistémica con IA. Arquitectura serverless escalable.", url: "https://www.aevoid.com" },
+                            { c: "GYP Industrial", r: "Arquitecto de Datos Industriales", d: "2021 - 2024", p: "Sistema DEMPS: Digitalización de trazabilidad masiva (30k+ registros) y migración a ERPs (SAP/MAXIMO)." },
+                            { c: "Lethan Soluciones", r: "Full Stack Dev & Founder", d: "2019 - Presente", p: "Plataforma de optimización de materiales para fabricación estructural.", url: "https://www.lethansoluciones.com" }
+                        ]
+                    },
+                    consultor: {
+                        name: "Consultor Polímata Híbrido",
+                        profile: "Estratega técnico especializado en la unión del bit (software) y el átomo (fabricación). Capacidad única para digitalizar procesos de manufactura pesada y ejecutar fabricación física de precisión.",
+                        skills: ["Diseño de Estructuras", "Fabricación Metalmecánica", "Carpintería Industrial", "Estrategia de Transformación Digital", "Mecanizado CNC"],
+                        sena: ["Administración RRHH", "SolidEdge CAD", "Desarrollo Web", "Mecánica Básica"],
+                        exp: [
+                            { c: "Lethan Soluciones", r: "Fundador / Consultor", d: "2019 - Presente", p: "Ingeniería de fabricación personalizada en metal y madera. Optimización CAD de estructuras pesadas.", url: "https://www.lethansoluciones.com" },
+                            { c: "Soluciones Industriales GYP", r: "Consultoría IT & Procesos", d: "2021 - 2024", p: "Estandarización de registros operativos (DEMPS) y automatización de procesos financieros." },
+                            { c: "Busscar / UTP", r: "Ingeniería de Diseño", d: "2013 - 2015", p: "Fundamentos de diseño mecánico y estandarización industrial en líneas de producción." }
+                        ]
+                    }
+                }
             },
             en: {
-                "system-auth": "Auth: Polymath_v11",
-                "nav-dossier": "01.Dossier",
-                "nav-history": "02.History",
-                "nav-stack": "03.Stack",
-                "connect-btn": "Connect_System",
-                "hero-tag": "System_Interface_Initialized",
-                "hero-title": "MATH",
-                "hero-desc": "The precision of <span class='text-black font-bold uppercase underline decoration-cobalt decoration-4 underline-offset-8'>Mechanical Engineering</span> synchronized with <span class='text-cobalt font-bold uppercase font-mono'>Digital Architecture</span>.",
-                "profile-label": "Verified_Identity",
-                "impact-1-label": "Process_Efficiency",
-                "impact-1-desc": "Optimization in <span class='text-white font-bold'>SAP & MAXIMO</span>.",
-                "impact-2-label": "Automation_Core",
-                "impact-2-desc": "Precision in <span class='text-white font-bold'>Payroll & KPIs</span>.",
-                "impact-3-label": "Lead_Control",
-                "impact-3-desc": "Management in <span class='text-white font-bold'>Industrial Plants</span>.",
-                "history-title": "History <span class='text-cobalt'>Dossier</span>",
-                "exp1-role": "IT Support Engineer",
-                "exp1-company": "Hitachi Energy (ABB)",
-                "exp1-desc": "<li>• Logic algorithms for overtime and surcharge calculations.</li><li>• Kanban dashboards for real-time floor control.</li>",
-                "exp2-role": "Trazas Engineering",
-                "exp2-company": "Design & Inspection",
-                "exp2-desc": "<p>> Technical surveys and design of high-precision industrial parts.</p><p>> Quality assurance in architectural and mechanical drawings.</p>",
-                "exp3-role": "Herval Industries",
-                "exp3-company": "Process Engineer",
-                "stack-title-1": "Core_Software_Stack",
-                "stack-title-2": "Mechanical_Forge",
-                "footer-system": "Polymath_System_v11",
-                "footer-access": "Direct_Access"
+                labels: {
+                    contact: "Contact", skills: "Skills", lang: "Languages", profile: "Profile", exp: "Work Experience", 
+                    sena: "SENA Certifications", projects: "Key Projects", edu: "Education", es: "Spanish:", 
+                    en: "English:", vEs: "Native", vEn: "Intermediate (B2)", aevoid: "Systemic thinking and AI ecosystem.",
+                    lethan: "Structural engineering and digital fabrication."
+                },
+                roles: {
+                    ingenieria: {
+                        name: "Operations & Project Engineer",
+                        profile: "Mechanical Engineer (UTP) expert in industrial optimization. Data-driven leader specialized in bridging shop-floor and administration through massive data architectures.",
+                        skills: ["Team Leadership (30+)", "Maintenance Mgmt", "SolidWorks & AutoCAD", "Quality Dossier Control", "Project Strategy"],
+                        sena: ["HR Administration", "SolidEdge CAD", "Industrial Maintenance"],
+                        exp: [
+                            { c: "GYP Industrial Solutions", r: "Commercial Dir / IT Support", d: "2021 - 2024", p: "REGISTRATION CONTROL Project: Data architecture for 30k+ records for Hitachi Energy and Suzuki." },
+                            { c: "Ingeniería de Pereira S.A.S", r: "Resident Engineer", d: "2016 - 2018", p: "Bioenergy Project: Leading 30+ staff in mechanical assembly at Bioethanol plant." },
+                            { c: "Busscar de Colombia", r: "Line Resident Engineer", d: "2015", p: "Technical assembly line advisory and bodywork design standards." }
+                        ]
+                    },
+                    software: {
+                        name: "Senior Full Stack Developer",
+                        profile: "Developer focused on industrial transformation through scalable software, AI, and Big Data. Specialist in Clean Architectures.",
+                        skills: ["React / Next.js / TypeScript", "Node.js & PostgreSQL", "Clean Architecture", "AI Oracle Integration", "Cloud Infrastructure"],
+                        sena: ["Java Dev", "PHP Dev", "C++ Programming", "SQL Database"],
+                        exp: [
+                            { c: "Aevoid.com", r: "Lead Developer / Founder", d: "2023 - Present", p: "Systemic productivity AI platform.", url: "https://www.aevoid.com" },
+                            { c: "GYP Industrial", r: "Industrial Data Architect", d: "2021 - 2024", p: "DEMPS System: 30k+ records digitalization and ERP migration." }
+                        ]
+                    },
+                    consultor: {
+                        name: "Hybrid Polymath Consultant",
+                        profile: "Technical strategist bridging bit and atom. Unique capacity to digitalize heavy manufacturing and execute precision physical fabrication.",
+                        skills: ["Structural Design", "Metalworking Fabrication", "Industrial Carpentry", "Digital Transformation", "CNC Machining"],
+                        sena: ["HR Administration", "SolidEdge CAD", "Web Development"],
+                        exp: [
+                            { c: "Lethan Soluciones", r: "Founder / Consultant", d: "2019 - Present", p: "Custom metal and wood fabrication engineering.", url: "https://www.lethansoluciones.com" }
+                        ]
+                    }
+                }
             }
         };
 
         let currentLang = 'es';
+        let currentRole = 'ingenieria';
 
-        // Lógica del Menú Móvil
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuOpen = document.getElementById('menu-open');
-        const menuClose = document.getElementById('menu-close');
-        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+        function updateView(newRole) {
+            currentRole = newRole;
+            document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('btn-active'));
+            document.getElementById(`btn-${newRole}`).classList.add('btn-active');
+            render();
+        }
 
-        const toggleMenu = () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('flex');
-            document.body.classList.toggle('overflow-hidden');
-        };
-
-        menuOpen.addEventListener('click', toggleMenu);
-        menuClose.addEventListener('click', toggleMenu);
-        mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
-
-        // Actualizar Traducciones
-        const updateLanguage = () => {
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[currentLang][key]) el.innerHTML = translations[currentLang][key];
-            });
-            const btnText = currentLang === 'es' ? 'ES | EN' : 'EN | ES';
-            document.getElementById('lang-toggle').innerText = btnText;
-            document.getElementById('lang-toggle-mobile').innerText = `Change_Language (${btnText})`;
-        };
-
-        document.getElementById('lang-toggle').addEventListener('click', () => {
+        function toggleLanguage() {
             currentLang = currentLang === 'es' ? 'en' : 'es';
-            updateLanguage();
-        });
+            document.getElementById('btn-lang').innerText = currentLang === 'es' ? "Es | En" : "En | Es";
+            render();
+        }
 
-        document.getElementById('lang-toggle-mobile').addEventListener('click', () => {
-            currentLang = currentLang === 'es' ? 'en' : 'es';
-            updateLanguage();
-        });
+        function render() {
+            const t = db[currentLang].labels;
+            const r = db[currentLang].roles[currentRole];
 
-        const reveal = () => {
-            document.querySelectorAll('.reveal').forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('active');
-            });
-        };
+            // Render etiquetas sidebar
+            document.getElementById('lbl-contact').innerText = t.contact;
+            document.getElementById('lbl-skills').innerText = t.skills;
+            document.getElementById('lbl-lang-title').innerText = t.lang;
+            document.getElementById('lbl-edu').innerText = t.edu;
+            document.getElementById('lbl-es').innerText = t.es;
+            document.getElementById('val-es').innerText = t.vEs;
+            document.getElementById('lbl-en').innerText = t.en;
+            document.getElementById('val-en').innerText = t.vEn;
 
-        window.addEventListener('scroll', reveal);
-        window.addEventListener('load', reveal);
+            // Render etiquetas main
+            document.getElementById('lbl-profile').innerText = t.profile;
+            document.getElementById('lbl-exp').innerText = t.exp;
+            document.getElementById('lbl-sena').innerText = t.sena;
+            document.getElementById('lbl-projects').innerText = t.projects;
+            document.getElementById('txt-aevoid').innerText = t.aevoid;
+            document.getElementById('txt-lethan').innerText = t.lethan;
+
+            document.getElementById('current-title').innerText = r.name;
+            document.getElementById('profile-desc').innerText = r.profile;
+
+            // Render Aptitudes
+            document.getElementById('skills-list').innerHTML = r.skills.map(s => `<li>${s}</li>`).join('');
+            
+            // Render Experiencia (Con Timeline Sub-Items)
+            document.getElementById('experience-container').innerHTML = r.exp.map(e => `
+                <div class="timeline-sub-item">
+                    <div class="flex justify-between items-start">
+                        <h4 class="font-bold text-gray-800 text-[13px] leading-tight">${e.r} <span class="text-gray-400 font-normal">| ${e.c}</span></h4>
+                        ${e.url ? `<a href="${e.url}" target="_blank" class="text-blue-500 hover:text-blue-700 no-print"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>` : ''}
+                    </div>
+                    <p class="text-[10px] text-blue-900 font-black uppercase tracking-tighter mt-0.5">${e.d}</p>
+                    <p class="text-[11px] text-gray-600 mt-1 leading-snug">${e.p}</p>
+                </div>
+            `).join('');
+
+            // Render SENA
+            document.getElementById('sena-container').innerHTML = r.sena.map(s => `
+                <div class="timeline-sub-item text-[11px] text-gray-600 font-medium leading-none">• ${s}</div>
+            `).join('');
+        }
+
+        window.onload = () => updateView('ingenieria');
     </script>
 </body>
 </html>
