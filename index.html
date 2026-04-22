@@ -3,328 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jonathan Mosquera - Portafolio Polímata</title>
-    <!-- Tailwind CSS para la estructura y responsividad -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Vinculación al archivo de estilos externo -->
+    <title>Jonathan Mosquera - Master CV V5</title>
+    <!-- Referencia al archivo externo de estilos -->
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- Menú de Navegación Superior (Oculto en Impresión) -->
-    <nav class="nav-header no-print sticky top-0 z-50 bg-white/95 backdrop-blur shadow-sm border-b p-3 flex overflow-x-auto gap-2 justify-start lg:justify-center">
-        <button onclick="updateView('ingenieria')" id="btn-ingenieria" class="btn-nav px-4 py-2 rounded text-[11px] font-bold bg-gray-100 hover:bg-gray-200 transition-colors whitespace-nowrap">ingeniería_operaciones</button>
-        <button onclick="updateView('software')" id="btn-software" class="btn-nav px-4 py-2 rounded text-[11px] font-bold bg-gray-100 hover:bg-gray-200 transition-colors whitespace-nowrap">Software engennier</button>
-        <button onclick="updateView('consultor')" id="btn-consultor" class="btn-nav px-4 py-2 rounded text-[11px] font-bold bg-gray-100 hover:bg-gray-200 transition-colors whitespace-nowrap">Consultor Hibrido</button>
-        <button onclick="toggleLanguage()" id="btn-lang" class="px-4 py-2 rounded text-[11px] font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition-colors whitespace-nowrap">Es | En</button>
-        <button onclick="window.print()" class="px-4 py-2 rounded text-[11px] font-bold bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-md whitespace-nowrap">Imprimir pdf</button>
+    <!-- NAVEGACIÓN -->
+    <nav class="action-buttons no-print">
+        <button class="btn btn-nav active" id="btn-software" onclick="updateProfile('software', this)">
+            <i class="fas fa-code"></i> Software
+        </button>
+        <button class="btn btn-nav" onclick="updateProfile('operaciones', this)">
+            <i class="fas fa-cogs"></i> Operaciones
+        </button>
+        <button class="btn btn-nav" onclick="updateProfile('hibrido', this)">
+            <i class="fas fa-sync-alt"></i> Híbrido
+        </button>
+        <button class="btn btn-lang" onclick="toggleLanguage()">
+            <i class="fas fa-language"></i> <span id="lang-label">ES | EN</span>
+        </button>
+        <button class="btn btn-print" onclick="handlePrint()">
+            <i class="fas fa-file-pdf"></i> Imprimir PDF
+        </button>
     </nav>
 
-    <div class="cv-page" id="cv-root">
-        
-        <!-- BARRA LATERAL (Sidebar Azul) -->
+    <div class="cv-wrapper">
+        <!-- SIDEBAR -->
         <aside class="sidebar">
-            <div class="flex flex-col items-center mb-8">
-                <!-- Marco de Foto Circular -->
-                <div class="photo-container w-32 h-32 lg:w-40 lg:h-40 rounded-full border-4 border-white/20 bg-white/10 flex items-center justify-center overflow-hidden mb-4 relative group">
-                    <img src="Public/images/Picture.webp" alt="Jonathan Mosquera" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="hidden absolute inset-0 items-center justify-center text-center">
-                        <span class="text-[10px] text-white/50 uppercase tracking-tighter">Jonathan<br>Mosquera R.</span>
-                    </div>
+            <div class="profile-container">
+                <div class="photo-frame-round">
+                    <img src="Public/images/Picture.webp" alt="Jonathan Mosquera" class="profile-photo" onerror="this.src='https://via.placeholder.com/160?text=JM'">
                 </div>
+                <h3 class="user-name-sidebar">Jonathan Mosquera</h3>
             </div>
 
-            <div class="space-y-6">
-                <!-- Contacto -->
-                <section>
-                    <h3 class="sidebar-label" id="lbl-contact">Contacto</h3>
-                    <ul class="text-[10px] lg:text-[11px] space-y-3 opacity-95">
-                        <li class="flex items-start gap-2">
-                            <span class="w-4 text-center">📍</span>
-                            <span>Carrera 8 #25-21 Barrio el Bohiho,<br>Dosquebradas, Risaralda</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <span class="w-4 text-center">📞</span>
-                            <span>3234957229</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <span class="w-4 text-center">✉️</span>
-                            <span class="break-all">ing.jonathanmosquera@gmail.com</span>
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <span class="w-4 text-center">📄</span>
-                            <span>Matrícula: QN230 110563</span>
-                        </li>
-                    </ul>
-                </section>
+            <section class="sidebar-section">
+                <h3 class="sidebar-title" id="title-contact">Contacto</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-id-card"></i> 1.088.285.173</li>
+                    <li><i class="fas fa-phone"></i> 323 495 7229</li>
+                    <li><i class="fas fa-envelope"></i> ing.jonathanmosquera@gmail.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Dosquebradas, Risaralda</li>
+                </ul>
+            </section>
 
-                <!-- Aptitudes -->
-                <section>
-                    <h3 class="sidebar-label" id="lbl-skills">Aptitudes</h3>
-                    <ul id="skills-list" class="text-[10px] lg:text-[11px] space-y-1.5 list-disc pl-4 opacity-95">
-                        <!-- Dinámico -->
-                    </ul>
-                </section>
+            <section class="sidebar-section">
+                <h3 class="sidebar-title" id="title-projects">Proyectos</h3>
+                <ul class="project-links">
+                    <li><a href="https://aevoid.com" target="_blank"><i class="fas fa-external-link-alt"></i> Aevoid.com</a></li>
+                    <li><a href="https://lethansoluciones.com" target="_blank"><i class="fas fa-link"></i> Lethan Soluciones</a></li>
+                    <li><a href="#" target="_blank"><i class="fas fa-link"></i> Buda ERP</a></li>
+                </ul>
+            </section>
 
-                <!-- Idiomas -->
-                <section>
-                    <h3 class="sidebar-label" id="lbl-lang-title">Idiomas</h3>
-                    <div class="text-[11px] space-y-1 opacity-95">
-                        <p><strong id="lbl-es">Español:</strong> <span id="val-es">Nativo</span></p>
-                        <p><strong id="lbl-en">Inglés:</strong> <span id="val-en">Intermedio (B2)</span></p>
-                    </div>
-                </section>
+            <section class="sidebar-section">
+                <h3 class="sidebar-title" id="title-skills">Aptitudes</h3>
+                <div id="skills-container"></div>
+            </section>
 
-                <!-- Educación -->
-                <section>
-                    <h3 class="sidebar-label" id="lbl-edu">Educación</h3>
-                    <div class="text-[11px] opacity-95">
-                        <p class="font-bold">Ingeniería Mecánica</p>
-                        <p>Univ. Tecnológica de Pereira (UTP)</p>
-                    </div>
-                </section>
-            </div>
-
-            <div class="mt-auto pt-10 text-center opacity-30 text-[9px] uppercase tracking-[0.3em]">
-                Portafolio Polímata
-            </div>
+            <section class="sidebar-section">
+                <h3 class="sidebar-title" id="title-sena">Formación SENA</h3>
+                <ul class="extra-edu-list" id="sena-list"></ul>
+            </section>
         </aside>
 
-        <!-- CONTENIDO PRINCIPAL (Timeline Vertical) -->
+        <!-- MAIN CONTENT -->
         <main class="main-content">
-            <header class="mb-10">
-                <h1 class="text-4xl lg:text-5xl font-black tracking-tighter text-gray-800 leading-none">JONATHAN<br>MOSQUERA R.</h1>
-                <p id="current-title" class="text-base lg:text-lg font-bold text-gray-500 mt-2 uppercase tracking-[0.15em] border-l-4 border-blue-900 pl-3">
-                    <!-- Dinámico -->
-                </p>
+            <header class="main-header">
+                <h1 class="user-fullname">JONATHAN MOSQUERA</h1>
+                <h2 id="dynamic-role" class="user-role"></h2>
+                <div id="dynamic-summary" class="profile-summary"></div>
             </header>
 
-            <div class="timeline-container">
-                <div class="timeline-line"></div>
-
-                <!-- SECCIÓN: PERFIL (Icono Perfil) -->
-                <div class="timeline-item">
-                    <div class="timeline-icon bg-slate-800">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="18" height="18"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    </div>
-                    <div class="timeline-content">
-                        <h2 class="section-title-alt" id="lbl-profile">Perfil Profesional</h2>
-                        <p id="profile-desc" class="text-xs lg:text-sm text-gray-600 leading-relaxed text-justify"></p>
-                    </div>
+            <section class="experience-section">
+                <div class="section-header">
+                    <i class="fas fa-briefcase"></i> <span id="title-exp">Trayectoria Profesional</span>
                 </div>
-
-                <!-- SECCIÓN: EXPERIENCIA (Icono Maletín) -->
-                <div class="timeline-item">
-                    <div class="timeline-icon bg-slate-800">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="18" height="18"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                    </div>
-                    <div class="timeline-content">
-                        <h2 class="section-title-alt" id="lbl-exp">Experiencia Laboral</h2>
-                        
-                        <!-- Contenedor Scroll Vertical para Experiencia -->
-                        <div id="experience-scroll-container" class="exp-scroll-area">
-                            <div id="experience-container" class="space-y-6 pr-2">
-                                <!-- Cargado dinámicamente -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN: FORMACIÓN (Icono Birrete) -->
-                <div class="timeline-item">
-                    <div class="timeline-icon bg-slate-800">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" width="18" height="18"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
-                    </div>
-                    <div class="timeline-content">
-                        <h2 class="section-title-alt" id="lbl-sena">Formación Complementaria SENA</h2>
-                        <div id="sena-container" class="grid grid-cols-1 gap-3">
-                            <!-- Dinámico -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proyectos Destacados -->
-            <section class="mt-8 pt-4 border-t border-gray-100">
-                <h2 class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-4" id="lbl-projects">Proyectos Especiales</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="project-card-interactive p-3 bg-gray-50 border rounded-lg hover:shadow-md transition-all">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-[11px] font-bold text-blue-900">AEVOID.COM</h4>
-                            <a href="https://www.aevoid.com" target="_blank" class="text-blue-600 no-print">
-                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            </a>
-                        </div>
-                        <p class="text-[10px] text-gray-500 mt-1 italic leading-tight" id="txt-aevoid"></p>
-                    </div>
-                    <div class="project-card-interactive p-3 bg-gray-50 border rounded-lg hover:shadow-md transition-all">
-                        <div class="flex justify-between items-start">
-                            <h4 class="text-[11px] font-bold text-blue-900">LETHAN SOLUCIONES</h4>
-                            <a href="https://www.lethansoluciones.com" target="_blank" class="text-blue-600 no-print">
-                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            </a>
-                        </div>
-                        <p class="text-[10px] text-gray-500 mt-1 italic leading-tight" id="txt-lethan"></p>
-                    </div>
+                <div class="scrollable-content-banner">
+                    <div class="timeline" id="experience-timeline"></div>
                 </div>
             </section>
+
+            <section class="education-section">
+                <div class="section-header">
+                    <i class="fas fa-graduation-cap"></i> <span id="title-edu">Estudios Superiores</span>
+                </div>
+                <div class="scrollable-content-edu">
+                    <div class="timeline" id="education-timeline"></div>
+                </div>
+            </section>
+
+            <!-- FOOTER INTEGRADO -->
+            <footer class="cv-footer">
+                <div class="footer-line"></div>
+                <div class="footer-content">
+                    <a href="https://wa.me/573234957229" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                    <a href="https://www.linkedin.com/in/jonathan-mosquera-ramirez-677837a9" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="mailto:ing.jonathanmosquera@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+                </div>
+            </footer>
         </main>
     </div>
 
-    <!-- Script de Datos e Interactividad -->
     <script>
-        const db = {
-            es: {
-                labels: {
-                    contact: "Contacto", skills: "Aptitudes", lang: "Idiomas", profile: "Perfil Profesional", exp: "Experiencia Laboral", 
-                    sena: "Formación SENA", projects: "Proyectos Destacados", edu: "Educación", es: "Español:", 
-                    en: "Inglés:", vEs: "Nativo", vEn: "Intermedio (B2)", aevoid: "Ecosistema de pensamiento sistémico e IA aplicada.",
-                    lethan: "Ingeniería estructural y fabricación digital en metal y madera."
+        // Configuración inicial de estado
+        let currentLang = 'es';
+        let currentProfile = 'software'; // Carga perfil software por defecto
+
+        const data = {
+            software: {
+                es: {
+                    role: "Senior Full Stack Developer | Industrial Data Architect",
+                    summary: "Ingeniero Mecánico y Desarrollador especializado en soluciones industriales escalables. Experto en Clean Architecture y transformación de flujos operativos complejos en ecosistemas digitales eficientes con enfoque en Big Data industrial. Versatilidad probada en automatización mediante VBA/Excel y gestión de proyectos técnicos.",
+                    exp: [
+                        { t: "Sistema DMEPS", c: "Health Monitoring System", d: "2023 - 2024", url: "https://dmeps.com", tasks: ["Desarrollo de monitoreo para EPS (Savia Salud, Nueva EPS).", "Implementación de métricas financieras y técnico-científicas."] },
+                        { t: "Aevoid.com", c: "Aethereum", d: "2022 - Actual", url: "https://aevoid.com", tasks: ["Plataforma de productividad basada en IA.", "Diseño y despliegue en Next.js y Vercel."] },
+                        { t: "Buda ERP", c: "Sistemas Industriales", d: "2021 - 2023", url: "#", tasks: ["Arquitectura de módulos de ingeniería de troqueles.", "Optimización de corte mediante algoritmos de materiales."] },
+                        { t: "Soporte IT / Data Architect", c: "Soluciones Industriales GYP", d: "2021 - 2024", url: "#", tasks: ["Ecosistema digital para 30,000+ registros.", "Automatización de nómina y migración a SAP/MAXIMO."] }
+                    ]
                 },
-                roles: {
-                    ingenieria: {
-                        name: "Ingeniero de Operaciones & Proyectos",
-                        profile: "Ingeniero Mecánico (UTP) experto en optimización industrial y dirección de proyectos. Especialista en orquestar el flujo entre planta y administración mediante arquitecturas de datos masivas. Liderazgo de equipos técnicos de gran escala.",
-                        skills: ["Liderazgo de Equipos (30+)", "Gestión de Mantenimiento", "SolidWorks & AutoCAD", "Interpretación Planos Isométricos", "Control de Dossier de Calidad"],
-                        sena: ["Admin. de Recursos Humanos", "Manejo de SolidEdge", "Mantenimiento Industrial", "Salud Ocupacional"],
-                        exp: [
-                            { c: "Soluciones Industriales GYP", r: "Director Comercial / Soporte IT", d: "2021 - 2024", p: "Proyecto CONTROL DE REGISTROS: Arquitectura de datos para trazabilidad operativa de 30k registros para Hitachi Energy, Suzuki y Magnetron. Automatización de nómina." },
-                            { c: "Industrias Herval S.A.S", r: "Ingeniero de Trabajo en Campo", d: "2019", p: "Supervisión técnica y ejecución de proyectos de mantenimiento y montaje metalmecánico." },
-                            { c: "Ingeniería de Pereira S.A.S", r: "Ing. Residente / Gestor", d: "2016 - 2018", p: "Proyecto Bioenergy: Liderazgo de 30 personas en montaje mecánico y control técnico de obra en planta de Bioetanol." },
-                            { c: "Busscar de Colombia", r: "Ingeniero Residente de Línea", d: "2015", p: "Asesoría técnica en línea de ensamble y diseño/modificación de estándares de carrocería." },
-                            { c: "Univ. Tecnológica de Pereira", r: "Dibujante Mecánico", d: "2013 - 2014", p: "Desarrollo de planos técnicos y soporte en diseño mecánico asistido por computadora." }
-                        ]
-                    },
-                    software: {
-                        name: "Senior Full Stack Developer",
-                        profile: "Desarrollador enfocado en transformar la industria mediante software escalable, IA y Big Data. Especialista en arquitecturas limpias que optimizan la productividad operativa mediante el procesamiento masivo de datos.",
-                        skills: ["React / Next.js / TypeScript", "Node.js & PostgreSQL", "Arquitectura Clean / Screaming", "Integración de IA / Oráculos", "Cloud (Vercel/Firebase)"],
-                        sena: ["Desarrollo Java (2020)", "Desarrollo PHP (2020)", "Programación C++ (2020)", "Base de Datos SQL"],
-                        exp: [
-                            { c: "Aevoid.com", r: "Lead Developer / Founder", d: "2023 - Presente", p: "Diseño y despliegue de plataforma de productividad sistémica con IA. Arquitectura serverless escalable.", url: "https://www.aevoid.com" },
-                            { c: "GYP Industrial", r: "Arquitecto de Datos Industriales", d: "2021 - 2024", p: "Sistema DEMPS: Digitalización de trazabilidad masiva (30k+ registros) y migración a ERPs (SAP/MAXIMO)." },
-                            { c: "Lethan Soluciones", r: "Full Stack Dev & Founder", d: "2019 - Presente", p: "Plataforma de optimización de materiales para fabricación estructural.", url: "https://www.lethansoluciones.com" }
-                        ]
-                    },
-                    consultor: {
-                        name: "Consultor Polímata Híbrido",
-                        profile: "Estratega técnico especializado en la unión del bit (software) y el átomo (fabricación). Capacidad única para digitalizar procesos de manufactura pesada y ejecutar fabricación física de precisión.",
-                        skills: ["Diseño de Estructuras", "Fabricación Metalmecánica", "Carpintería Industrial", "Estrategia de Transformación Digital", "Mecanizado CNC"],
-                        sena: ["Administración RRHH", "SolidEdge CAD", "Desarrollo Web", "Mecánica Básica"],
-                        exp: [
-                            { c: "Lethan Soluciones", r: "Fundador / Consultor", d: "2019 - Presente", p: "Ingeniería de fabricación personalizada en metal y madera. Optimización CAD de estructuras pesadas.", url: "https://www.lethansoluciones.com" },
-                            { c: "Soluciones Industriales GYP", r: "Consultoría IT & Procesos", d: "2021 - 2024", p: "Estandarización de registros operativos (DEMPS) y automatización de procesos financieros." },
-                            { c: "Busscar / UTP", r: "Ingeniería de Diseño", d: "2013 - 2015", p: "Fundamentos de diseño mecánico y estandarización industrial en líneas de producción." }
-                        ]
-                    }
+                en: {
+                    role: "Senior Full Stack Developer | Industrial Data Architect",
+                    summary: "Mechanical Engineer and Developer specialized in scalable industrial solutions. Expert in Clean Architecture and transforming complex operational flows into efficient digital ecosystems with an industrial Big Data focus. Proven versatility in VBA/Excel automation and technical project management.",
+                    exp: [
+                        { t: "DMEPS System", c: "Health Monitoring System", d: "2023 - 2024", url: "https://dmeps.com", tasks: ["Monitoring system development for Health Entities (Savia Salud, Nueva EPS).", "Implementation of financial and technical-scientific metrics."] },
+                        { t: "Aevoid.com", c: "Aethereum", d: "2022 - Present", url: "https://aevoid.com", tasks: ["AI-based productivity platform.", "Design and deployment using Next.js and Vercel."] },
+                        { t: "Buda ERP", c: "Industrial Systems", d: "2021 - 2023", url: "#", tasks: ["Architecture of die engineering modules.", "Cutting optimization via material algorithms."] },
+                        { t: "IT Support / Data Architect", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Digital ecosystem for 30,000+ records.", "Payroll automation and migration to SAP/MAXIMO."] }
+                    ]
                 }
             },
-            en: {
-                labels: {
-                    contact: "Contact", skills: "Skills", lang: "Languages", profile: "Profile", exp: "Work Experience", 
-                    sena: "SENA Certifications", projects: "Key Projects", edu: "Education", es: "Spanish:", 
-                    en: "English:", vEs: "Native", vEn: "Intermediate (B2)", aevoid: "Systemic thinking and AI ecosystem.",
-                    lethan: "Structural engineering and digital fabrication."
+            operaciones: {
+                es: {
+                    role: "Ingeniero de Operaciones | Project Manager",
+                    summary: "Ingeniero Mecánico experto en dirección de proyectos industriales y optimización operativa. Especialista en liderar equipos técnicos y aplicar metodologías Lean. Domina herramientas avanzadas de Project Management y automatización en Office para maximizar la productividad y seguridad.",
+                    exp: [
+                        { t: "Director Comercial / Técnico", c: "Soluciones Industriales GYP", d: "2021 - 2024", url: "#", tasks: ["Liderazgo técnico en proyectos con Hitachi Energy y Suzuki.", "Optimización de procesos de mantenimiento y montaje."] },
+                        { t: "Ingeniero Residente", c: "Ingeniería de Pereira (Bioenergy)", d: "2016 - 2018", url: "#", tasks: ["Supervisión de cuadrillas de 30+ operarios.", "Control de Dossier de calidad e interpretación de isométricos."] },
+                        { t: "Ingeniero Residente", c: "Industrias del Pacífico", d: "2015 - 2019", url: "#", tasks: ["Montaje de tanques y estructuras metálicas certificadas.", "Garantía de estándares de soldadura y seguridad industrial."] }
+                    ]
                 },
-                roles: {
-                    ingenieria: {
-                        name: "Operations & Project Engineer",
-                        profile: "Mechanical Engineer (UTP) expert in industrial optimization. Data-driven leader specialized in bridging shop-floor and administration through massive data architectures.",
-                        skills: ["Team Leadership (30+)", "Maintenance Mgmt", "SolidWorks & AutoCAD", "Quality Dossier Control", "Project Strategy"],
-                        sena: ["HR Administration", "SolidEdge CAD", "Industrial Maintenance"],
-                        exp: [
-                            { c: "GYP Industrial Solutions", r: "Commercial Dir / IT Support", d: "2021 - 2024", p: "REGISTRATION CONTROL Project: Data architecture for 30k+ records for Hitachi Energy and Suzuki." },
-                            { c: "Ingeniería de Pereira S.A.S", r: "Resident Engineer", d: "2016 - 2018", p: "Bioenergy Project: Leading 30+ staff in mechanical assembly at Bioethanol plant." },
-                            { c: "Busscar de Colombia", r: "Line Resident Engineer", d: "2015", p: "Technical assembly line advisory and bodywork design standards." }
-                        ]
-                    },
-                    software: {
-                        name: "Senior Full Stack Developer",
-                        profile: "Developer focused on industrial transformation through scalable software, AI, and Big Data. Specialist in Clean Architectures.",
-                        skills: ["React / Next.js / TypeScript", "Node.js & PostgreSQL", "Clean Architecture", "AI Oracle Integration", "Cloud Infrastructure"],
-                        sena: ["Java Dev", "PHP Dev", "C++ Programming", "SQL Database"],
-                        exp: [
-                            { c: "Aevoid.com", r: "Lead Developer / Founder", d: "2023 - Present", p: "Systemic productivity AI platform.", url: "https://www.aevoid.com" },
-                            { c: "GYP Industrial", r: "Industrial Data Architect", d: "2021 - 2024", p: "DEMPS System: 30k+ records digitalization and ERP migration." }
-                        ]
-                    },
-                    consultor: {
-                        name: "Hybrid Polymath Consultant",
-                        profile: "Technical strategist bridging bit and atom. Unique capacity to digitalize heavy manufacturing and execute precision physical fabrication.",
-                        skills: ["Structural Design", "Metalworking Fabrication", "Industrial Carpentry", "Digital Transformation", "CNC Machining"],
-                        sena: ["HR Administration", "SolidEdge CAD", "Web Development"],
-                        exp: [
-                            { c: "Lethan Soluciones", r: "Founder / Consultant", d: "2019 - Present", p: "Custom metal and wood fabrication engineering.", url: "https://www.lethansoluciones.com" }
-                        ]
-                    }
+                en: {
+                    role: "Operations Engineer | Project Manager",
+                    summary: "Mechanical Engineer expert in industrial project management and operational optimization. Specialist in leading technical teams and applying Lean methodologies. Mastery of advanced Project Management tools and Office automation to maximize productivity and safety.",
+                    exp: [
+                        { t: "Commercial / Technical Director", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Technical leadership for projects with Hitachi Energy and Suzuki.", "Optimization of maintenance and assembly processes."] },
+                        { t: "Resident Engineer", c: "Ingeniería de Pereira (Bioenergy)", d: "2016 - 2018", url: "#", tasks: ["Supervision of 30+ operators crews.", "Quality Dossier control and isometric drawing interpretation."] },
+                        { t: "Resident Engineer", c: "Industrias del Pacífico", d: "2015 - 2019", url: "#", tasks: ["Assembly of tanks and certified metallic structures.", "Assurance of welding standards and industrial safety."] }
+                    ]
+                }
+            },
+            hibrido: {
+                es: {
+                    role: "Consultor en Transformación Digital | Ing. Mecánico",
+                    summary: "Especialista en cerrar la brecha entre el diseño de ingeniería y la ejecución digital. Capacidad probada para digitalizar procesos de manufactura mediante VBA, Excel y software a medida, optimizando la trazabilidad industrial y el Project Management.",
+                    exp: [
+                        { t: "Consultor Técnico Digital", c: "Soluciones Industriales GYP", d: "2021 - 2024", url: "#", tasks: ["Digitalización de procesos de trazabilidad de activos.", "Desarrollo de tableros para transparencia de costos operativos."] },
+                        { t: "Fundador & Consultor", c: "Lethan Soluciones", d: "2018 - 2021", url: "https://lethansoluciones.com", tasks: ["Diseño estructural de alta precisión con software CAD/BIM.", "Optimización de proyectos mediante integración tecnológica."] }
+                    ]
+                },
+                en: {
+                    role: "Digital Transformation Consultant | Mechanical Eng.",
+                    summary: "Specialist in bridging the gap between engineering design and digital execution. Proven ability to digitalize manufacturing processes through VBA, Excel, and custom software, optimizing industrial traceability and Project Management.",
+                    exp: [
+                        { t: "Digital Technical Consultant", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Digitalization of asset traceability processes.", "Dashboard development for operational cost transparency."] },
+                        { t: "Founder & Consultant", c: "Lethan Soluciones", d: "2018 - 2021", url: "https://lethansoluciones.com", tasks: ["High-precision structural design using CAD/BIM software.", "Project optimization through technology integration."] }
+                    ]
                 }
             }
         };
 
-        let currentLang = 'es';
-        let currentRole = 'ingenieria';
+        const staticData = {
+            es: {
+                skills: ["VBA / Excel Avanzado", "Project Management", "Office / MS Project", "React / Next.js", "SolidWorks / SAP", "Clean Architecture"],
+                sena: ["Java & PHP Web (Dic 2020)", "Prog. C++ (Nov 2020)", "Admón. RRHH (Dic 2020)", "Solid Edge (Jul 2012)"],
+                edu: [{ t: "Ingeniería Mecánica", c: "Univ. Tecnológica de Pereira", d: "Graduado", desc: "Enfoque en optimización de procesos industriales." }],
+                titles: { contact: "Contacto", projects: "Proyectos", skills: "Aptitudes", sena: "Formación SENA", exp: "Trayectoria Profesional", edu: "Estudios Superiores" },
+                goPage: "Ir a página"
+            },
+            en: {
+                skills: ["VBA / Advanced Excel", "Project Management", "Office / MS Project", "React / Next.js", "SolidWorks / SAP", "Clean Architecture"],
+                sena: ["Java & PHP Web (Dec 2020)", "C++ Programming (Nov 2020)", "HR Admin (Dec 2020)", "Solid Edge (Jul 2012)"],
+                edu: [{ t: "Mechanical Engineering", c: "UTP University", d: "Graduated", desc: "Focus on industrial process optimization." }],
+                titles: { contact: "Contact", projects: "Projects", skills: "Skills", sena: "SENA Training", exp: "Professional Experience", edu: "Higher Education" },
+                goPage: "Go to page"
+            }
+        };
 
-        function updateView(newRole) {
-            currentRole = newRole;
-            document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('btn-active'));
-            document.getElementById(`btn-${newRole}`).classList.add('btn-active');
+        function render() {
+            const p = data[currentProfile][currentLang];
+            const s = staticData[currentLang];
+
+            // Renderizado de textos principales
+            document.getElementById('dynamic-role').innerText = p.role;
+            document.getElementById('dynamic-summary').innerText = p.summary;
+            
+            // Actualización de títulos
+            Object.keys(s.titles).forEach(id => {
+                const el = document.getElementById(`title-${id}`);
+                if(el) el.innerText = s.titles[id];
+            });
+
+            // Renderizado de habilidades
+            document.getElementById('skills-container').innerHTML = s.skills.map(skill => `
+                <div class="skill-item">
+                    <div class="skill-name"><span>${skill}</span></div>
+                    <div class="progress-bg"><div class="progress-fill" style="width: 90%"></div></div>
+                </div>`).join('');
+
+            // SENA
+            document.getElementById('sena-list').innerHTML = s.sena.map(item => `<li>${item}</li>`).join('');
+
+            // Experiencia
+            document.getElementById('experience-timeline').innerHTML = p.exp.map(e => `
+                <div class="timeline-item">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-header">
+                        <div class="job-info">
+                            <span class="job-title">${e.t}</span>
+                            <span class="company">${e.c}</span>
+                        </div>
+                        <span class="job-date">${e.d}</span>
+                    </div>
+                    <ul class="tasks-list">
+                        ${e.tasks.map(t => `<li>${t}</li>`).join('')}
+                    </ul>
+                    ${(e.url && e.url !== "#") ? `<a href="${e.url}" target="_blank" class="exp-link"><i class="fas fa-external-link-alt"></i> ${s.goPage}</a>` : ''}
+                </div>`).join('');
+
+            // Educación
+            document.getElementById('education-timeline').innerHTML = s.edu.map(e => `
+                <div class="timeline-item">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-header">
+                        <div class="job-info"><span class="job-title">${e.t}</span><span class="company">${e.c}</span></div>
+                        <span class="job-date">${e.d}</span>
+                    </div>
+                    <p class="edu-details">${e.desc}</p>
+                </div>`).join('');
+        }
+
+        function updateProfile(key, btn) {
+            currentProfile = key;
+            document.querySelectorAll('.btn-nav').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
             render();
         }
 
         function toggleLanguage() {
             currentLang = currentLang === 'es' ? 'en' : 'es';
-            document.getElementById('btn-lang').innerText = currentLang === 'es' ? "Es | En" : "En | Es";
+            document.getElementById('lang-label').innerText = currentLang === 'es' ? 'ES | EN' : 'EN | ES';
             render();
         }
 
-        function render() {
-            const t = db[currentLang].labels;
-            const r = db[currentLang].roles[currentRole];
-
-            // Render etiquetas sidebar
-            document.getElementById('lbl-contact').innerText = t.contact;
-            document.getElementById('lbl-skills').innerText = t.skills;
-            document.getElementById('lbl-lang-title').innerText = t.lang;
-            document.getElementById('lbl-edu').innerText = t.edu;
-            document.getElementById('lbl-es').innerText = t.es;
-            document.getElementById('val-es').innerText = t.vEs;
-            document.getElementById('lbl-en').innerText = t.en;
-            document.getElementById('val-en').innerText = t.vEn;
-
-            // Render etiquetas main
-            document.getElementById('lbl-profile').innerText = t.profile;
-            document.getElementById('lbl-exp').innerText = t.exp;
-            document.getElementById('lbl-sena').innerText = t.sena;
-            document.getElementById('lbl-projects').innerText = t.projects;
-            document.getElementById('txt-aevoid').innerText = t.aevoid;
-            document.getElementById('txt-lethan').innerText = t.lethan;
-
-            document.getElementById('current-title').innerText = r.name;
-            document.getElementById('profile-desc').innerText = r.profile;
-
-            // Render Aptitudes
-            document.getElementById('skills-list').innerHTML = r.skills.map(s => `<li>${s}</li>`).join('');
-            
-            // Render Experiencia (Con Timeline Sub-Items)
-            document.getElementById('experience-container').innerHTML = r.exp.map(e => `
-                <div class="timeline-sub-item">
-                    <div class="flex justify-between items-start">
-                        <h4 class="font-bold text-gray-800 text-[13px] leading-tight">${e.r} <span class="text-gray-400 font-normal">| ${e.c}</span></h4>
-                        ${e.url ? `<a href="${e.url}" target="_blank" class="text-blue-500 hover:text-blue-700 no-print"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a>` : ''}
-                    </div>
-                    <p class="text-[10px] text-blue-900 font-black uppercase tracking-tighter mt-0.5">${e.d}</p>
-                    <p class="text-[11px] text-gray-600 mt-1 leading-snug">${e.p}</p>
-                </div>
-            `).join('');
-
-            // Render SENA
-            document.getElementById('sena-container').innerHTML = r.sena.map(s => `
-                <div class="timeline-sub-item text-[11px] text-gray-600 font-medium leading-none">• ${s}</div>
-            `).join('');
+        // Función de impresión
+        function handlePrint() {
+            window.focus();
+            window.print();
         }
 
-        window.onload = () => updateView('ingenieria');
+        window.onload = () => {
+            render();
+            // Ajuste de viewport para móviles
+            if(window.innerWidth < 850) {
+                document.querySelector('meta[name="viewport"]').setAttribute("content", "width=850, initial-scale=0.4");
+            }
+        };
     </script>
 </body>
 </html>
