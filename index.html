@@ -272,12 +272,12 @@
         function adjustMobileScale() {
             const wrapperWidth = 816; // Ancho base tamaño carta
             const screenWidth = window.innerWidth;
-            const margin = 10; // 5px a cada lado (total 10px)
+            const margin = 10; // 5px a cada lado
             
             if(screenWidth < wrapperWidth + margin) {
-                // Cálculo de escala para que quepa en el ancho de pantalla menos los márgenes
+                // Cálculo de escala preciso para centrado
                 const scale = (screenWidth - margin) / wrapperWidth;
-                document.querySelector('meta[name="viewport"]').setAttribute("content", `width=${wrapperWidth}, initial-scale=${scale.toFixed(3)}, maximum-scale=${scale.toFixed(3)}, user-scalable=no`);
+                document.querySelector('meta[name="viewport"]').setAttribute("content", `width=${wrapperWidth}, initial-scale=${scale.toFixed(4)}, maximum-scale=${scale.toFixed(4)}, user-scalable=no`);
             } else {
                 document.querySelector('meta[name="viewport"]').setAttribute("content", "width=device-width, initial-scale=1.0");
             }

@@ -25,10 +25,11 @@ body {
     background-color: #f4f7f6;
     color: var(--text-dark);
     line-height: 1.4;
-    /* Asegura que el contenido se centre cuando se escala en móviles */
+    /* Centrado dinámico para pantallas grandes y móviles escalados */
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
 }
 
 /* ================================================================
@@ -91,19 +92,18 @@ body {
 }
 
 /* ================================================================
-   ESTRUCTURA PRINCIPAL (TAMAÑO CARTA)
+   ESTRUCTURA PRINCIPAL (TAMAÑO CARTA EXACTO)
    ================================================================ */
 .cv-wrapper {
-    width: 816px; /* Ancho carta a 96 DPI */
+    width: 816px; /* 8.5in a 96 DPI */
     margin: 80px auto 40px;
     background: var(--white);
     display: flex; 
     flex-direction: row;
     box-shadow: var(--shadow);
-    min-height: 1056px; /* Alto carta a 96 DPI */
+    min-height: 1056px; /* 11in a 96 DPI */
     position: relative;
     overflow: hidden;
-    /* Garantiza centrado horizontal */
     flex-shrink: 0;
 }
 
@@ -126,7 +126,6 @@ body {
     margin: 0 auto 15px;
     overflow: hidden;
     background: #eee;
-    /* Corrección de recorte circular para Webkit */
     -webkit-mask-image: -webkit-radial-gradient(white, black);
 }
 
@@ -161,7 +160,6 @@ body {
     z-index: 1;
 }
 
-/* Efectos Hover */
 .photo-frame-round:hover .photo-container {
     transform: scale(1.08);
 }
@@ -390,11 +388,11 @@ body {
 }
 
 /* ================================================================
-   OPTIMIZACIÓN DE IMPRESIÓN (PDF PERFECTO)
+   OPTIMIZACIÓN DE IMPRESIÓN (CARTA PERFECTA)
    ================================================================ */
 @media print {
     @page { 
-        size: letter; 
+        size: letter; /* 8.5in x 11in */
         margin: 0; 
     }
     
@@ -403,6 +401,9 @@ body {
         -webkit-print-color-adjust: exact !important; 
         print-color-adjust: exact !important;
         display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden !important;
     }
     
     .no-print { display: none !important; }
@@ -411,11 +412,6 @@ body {
     .profile-photo { opacity: 1 !important; visibility: visible !important; }
     .photo-container { transform: none !important; }
 
-    /* Ajuste para que todo quepa en una página */
-    #experience-timeline .timeline-item:nth-child(n+5) {
-        display: none !important;
-    }
-
     .cv-wrapper {
         margin: 0 !important;
         box-shadow: none !important;
@@ -423,15 +419,18 @@ body {
         min-height: 100vh !important;
         display: flex !important;
         flex-direction: row !important;
+        page-break-after: avoid;
     }
 
     .sidebar { 
         width: 30% !important;
         min-height: 100vh !important;
+        background-color: var(--primary-blue) !important;
     }
 
     .main-content {
         width: 70% !important;
+        background-color: white !important;
     }
 
     .scrollable-content-banner, .scrollable-content-edu {
