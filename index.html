@@ -3,16 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jonathan Mosquera - Master CV V5</title>
+    <title>Jonathan Mosquera | Ingeniero Mecánico y Desarrollador Full Stack</title>
+    
+    <!-- SEO Básico para Google -->
+    <meta name="description" content="Jonathan Mosquera - Ingeniero Mecánico y Desarrollador Full Stack. Arquitecto de Datos Industriales especializado en Transformación Digital e Industria 4.0.">
+    <meta name="keywords" content="Jonathan Mosquera, Ingeniero Mecánico, Full Stack Developer, Industrial Data Architect, Transformación Digital, Industria 4.0, Dosquebradas">
+    <meta name="author" content="Jonathan Mosquera">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://jonathanmosqueraramirez.github.io/portfolio-polimata/">
 
-    <!-- FAVICONS (Paquete favicon_io en carpeta específica) -->
+    <!-- FAVICONS (Rutas corregidas: Public/images/ico/) -->
     <link rel="apple-touch-icon" sizes="180x180" href="Public/images/ico/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="Public/images/ico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="Public/images/ico/favicon-16x16.png">
     <link rel="manifest" href="Public/images/ico/site.webmanifest">
     <link rel="shortcut icon" href="Public/images/ico/favicon.ico">
 
-    <!-- METADATOS PARA COMPARTIR (Rutas corregidas) -->
+    <!-- METADATOS PARA COMPARTIR (Vista miniatura / Previsualización) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jonathanmosqueraramirez.github.io/portfolio-polimata/">
     <meta property="og:title" content="Jonathan Mosquera | Industrial Data Architect">
@@ -34,7 +41,10 @@
     <!-- NAVEGACIÓN -->
     <nav class="action-buttons no-print">
         <div class="nav-top-bar">
+            <!-- Logo JMR -->
             <div class="nav-logo">JMR</div>
+            
+            <!-- Grupo de acciones externas (Siempre visibles) -->
             <div class="nav-external-actions">
                 <button class="btn btn-print" onclick="handlePrint()" title="Imprimir PDF">
                     <i class="fas fa-print"></i>
@@ -45,6 +55,7 @@
             </div>
         </div>
 
+        <!-- Menú colapsable (Roles y Lenguaje) -->
         <div class="nav-menu-links" id="nav-menu-links">
             <button class="btn btn-nav active" id="btn-software" onclick="updateProfile('software', this); closeMenu()">
                 <i class="fas fa-code"></i> Software
@@ -62,6 +73,7 @@
     </nav>
 
     <div class="cv-wrapper">
+        <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="profile-container">
                 <div class="photo-frame-round">
@@ -102,6 +114,7 @@
             </section>
         </aside>
 
+        <!-- MAIN CONTENT -->
         <main class="main-content">
             <header class="main-header">
                 <h1 class="user-fullname">JONATHAN MOSQUERA</h1>
@@ -139,6 +152,7 @@
     </div>
 
     <script>
+        // Configuración de estado
         let currentLang = 'es';
         let currentProfile = 'software'; 
 
@@ -224,6 +238,7 @@
             }
         };
 
+        // Lógica de Menú
         function toggleMenu() {
             const menu = document.getElementById('nav-menu-links');
             menu.classList.toggle('active');
@@ -234,21 +249,27 @@
             menu.classList.remove('active');
         }
 
+        // Renderizado Dinámico
         function render() {
             const p = data[currentProfile][currentLang];
             const s = staticData[currentLang];
+
             document.getElementById('dynamic-role').innerText = p.role;
             document.getElementById('dynamic-summary').innerText = p.summary;
+            
             Object.keys(s.titles).forEach(id => {
                 const el = document.getElementById(`title-${id}`);
                 if(el) el.innerText = s.titles[id];
             });
+
             document.getElementById('skills-container').innerHTML = s.skills.map(skill => `
                 <div class="skill-item">
                     <div class="skill-name"><span>${skill}</span></div>
                     <div class="progress-bg"><div class="progress-fill" style="width: 90%"></div></div>
                 </div>`).join('');
+
             document.getElementById('sena-list').innerHTML = s.sena.map(item => `<li>${item}</li>`).join('');
+
             document.getElementById('experience-timeline').innerHTML = p.exp.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -264,6 +285,7 @@
                     </ul>
                     ${(e.url && e.url !== "#") ? `<a href="${e.url}" target="_blank" class="exp-link"><i class="fas fa-external-link-alt"></i> ${s.goPage}</a>` : ''}
                 </div>`).join('');
+
             document.getElementById('education-timeline').innerHTML = s.edu.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -293,6 +315,7 @@
             window.print();
         }
 
+        // Ejecución inicial y protección
         window.onload = () => {
             render();
             document.querySelectorAll('img').forEach(img => {
@@ -301,6 +324,7 @@
             });
         };
 
+        // Cerrar menú al hacer clic fuera
         document.addEventListener('click', (e) => {
             const menu = document.getElementById('nav-menu-links');
             const btn = document.getElementById('hamburger-btn');

@@ -128,7 +128,6 @@ body {
         order: 1;
     }
 
-    /* Restaurar texto del botón imprimir en escritorio */
     .btn-print::after {
         content: " Imprimir PDF";
     }
@@ -181,15 +180,14 @@ body {
     object-fit: cover;
     border-radius: 50%;
     transition: opacity 0.4s ease;
-    user-select: none; /* Bloqueo de selección */
-    pointer-events: auto;
+    user-select: none;
 }
 
 .profile-gif { opacity: 0; }
 .photo-frame-round:hover .profile-photo { opacity: 0; }
 .photo-frame-round:hover .profile-gif { opacity: 1; }
 
-.user-name-sidebar { text-align: center; font-size: 1.1rem; margin-bottom: 25px; }
+.user-name-sidebar { text-align: center; font-size: 1.1rem; margin-bottom: 25px; font-weight: 600; }
 .sidebar-section { margin-bottom: 25px; }
 .sidebar-title {
     text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
@@ -257,6 +255,8 @@ body {
     text-decoration: none; border: 1px solid var(--accent-blue); padding: 1px 6px; border-radius: 3px;
 }
 
+.edu-details { font-size: 0.75rem; color: var(--text-gray); }
+
 /* FOOTER */
 .cv-footer { margin-top: auto; padding-top: 15px; text-align: center; }
 .footer-line { height: 1px; background: var(--border-light); margin-bottom: 10px; }
@@ -269,7 +269,7 @@ body {
 @media screen and (max-width: 816px) {
     .action-buttons {
         flex-direction: column;
-        padding: 8px 5px; /* Margen de 5px laterales */
+        padding: 8px 5px; /* Margen de 5px laterales solicitado */
     }
 
     .nav-top-bar {
@@ -296,13 +296,9 @@ body {
         justify-content: center;
         padding: 12px;
         border-radius: 0;
-        font-size: 0.9rem;
     }
 
-    /* Ocultar texto de imprimir solo en móvil para diseño compacto */
-    .btn-print::after {
-        content: none;
-    }
+    .btn-print::after { content: none; }
 
     .cv-wrapper {
         flex-direction: column;
@@ -312,17 +308,14 @@ body {
     .sidebar, .main-content { width: 100%; }
     .sidebar { padding: 25px; }
     .main-content { padding: 20px; }
+    .user-fullname { font-size: 1.8rem; }
 }
 
 /* ================================================================
-   REGLA DE IMPRESIÓN (TAMAÑO CARTA Y SOLO 4 EXPERIENCIAS)
+   REGLA DE IMPRESIÓN (SOLO 4 EXPERIENCIAS)
    ================================================================ */
 @media print {
-    @page { 
-        size: letter; 
-        margin: 0; 
-    }
-    
+    @page { size: letter; margin: 0; }
     body { background: white !important; }
     .no-print { display: none !important; }
 
@@ -330,22 +323,20 @@ body {
         width: 816px !important;
         height: 1056px !important;
         margin: 0 !important;
-        box-shadow: none !important;
         display: flex !important;
         flex-direction: row !important;
         -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
     }
 
     .sidebar { width: 32% !important; background-color: var(--primary-blue) !important; color: white !important; }
     .main-content { width: 68% !important; }
-    
+
     .scrollable-content-banner, .scrollable-content-edu {
         max-height: none !important;
         overflow: visible !important;
     }
 
-    /* REGLA: Ocultar de la 5ta experiencia en adelante */
+    /* Ocultar de la 5ta experiencia en adelante */
     #experience-timeline .timeline-item:nth-child(n+5) {
         display: none !important;
     }
