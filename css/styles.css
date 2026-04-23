@@ -115,25 +115,20 @@ body {
 /* Adaptación para Escritorio (DESKTOP) */
 @media screen and (min-width: 817px) {
     .action-buttons {
-        justify-content: center; /* Centrar toda la barra en escritorio */
+        justify-content: center; 
         gap: 20px;
         padding: 8px 20px;
     }
     
-    .nav-top-bar {
-        order: -1; /* Logo a la izquierda */
-    }
-
-    .nav-external-actions {
-        order: 2; /* Botón imprimir al final de la fila */
-    }
+    .nav-top-bar { order: -1; }
+    .nav-external-actions { order: 2; }
     
     .nav-menu-links {
         display: flex !important;
         order: 1;
     }
 
-    /* En escritorio el botón imprimir recupera su texto vía CSS si es necesario o se mantiene estándar */
+    /* Restaurar texto del botón imprimir en escritorio */
     .btn-print::after {
         content: " Imprimir PDF";
     }
@@ -186,6 +181,8 @@ body {
     object-fit: cover;
     border-radius: 50%;
     transition: opacity 0.4s ease;
+    user-select: none; /* Bloqueo de selección */
+    pointer-events: auto;
 }
 
 .profile-gif { opacity: 0; }
@@ -272,7 +269,7 @@ body {
 @media screen and (max-width: 816px) {
     .action-buttons {
         flex-direction: column;
-        padding: 8px 5px; /* Margen de 5px a los lados solicitado */
+        padding: 8px 5px; /* Margen de 5px laterales */
     }
 
     .nav-top-bar {
@@ -302,7 +299,7 @@ body {
         font-size: 0.9rem;
     }
 
-    /* Ocultar el texto del botón imprimir en móvil para que quede solo el icono junto a la hamburguesa */
+    /* Ocultar texto de imprimir solo en móvil para diseño compacto */
     .btn-print::after {
         content: none;
     }
@@ -318,7 +315,7 @@ body {
 }
 
 /* ================================================================
-   REGLA DE IMPRESIÓN (SOLO 4 EXPERIENCIAS)
+   REGLA DE IMPRESIÓN (TAMAÑO CARTA Y SOLO 4 EXPERIENCIAS)
    ================================================================ */
 @media print {
     @page { 
@@ -348,7 +345,7 @@ body {
         overflow: visible !important;
     }
 
-    /* REGLA SOLICITADA: Ocultar de la 5ta experiencia en adelante */
+    /* REGLA: Ocultar de la 5ta experiencia en adelante */
     #experience-timeline .timeline-item:nth-child(n+5) {
         display: none !important;
     }

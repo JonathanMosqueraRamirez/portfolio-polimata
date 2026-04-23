@@ -4,19 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jonathan Mosquera - Master CV V5</title>
-    <!-- Referencia al archivo externo de estilos -->
+
+    <!-- FAVICONS (Paquete favicon_io en carpeta específica) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="Public/images/ico/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Public/images/ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Public/images/ico/favicon-16x16.png">
+    <link rel="manifest" href="Public/images/ico/site.webmanifest">
+    <link rel="shortcut icon" href="Public/images/ico/favicon.ico">
+
+    <!-- METADATOS PARA COMPARTIR (Rutas corregidas) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jonathanmosqueraramirez.github.io/portfolio-polimata/">
+    <meta property="og:title" content="Jonathan Mosquera | Industrial Data Architect">
+    <meta property="og:description" content="Ingeniero Mecánico y Desarrollador Full Stack con enfoque en procesos industriales e Industria 4.0.">
+    <meta property="og:image" content="Public/images/ico/android-chrome-512x512.png">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Jonathan Mosquera | Portfolio">
+    <meta name="twitter:description" content="Consultor en Transformación Digital e Ingeniería Mecánica.">
+    <meta name="twitter:image" content="Public/images/ico/android-chrome-512x512.png">
+
+    <!-- Estilos (Ruta: css/styles.css) -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <!-- NAVEGACIÓN RESTAURADA -->
+    <!-- NAVEGACIÓN -->
     <nav class="action-buttons no-print">
         <div class="nav-top-bar">
-            <!-- Logo JMR (Fondo negro, letras blancas definido en CSS) -->
             <div class="nav-logo">JMR</div>
-            
-            <!-- Grupo de acciones externas (Imprimir y Hamburguesa) -->
             <div class="nav-external-actions">
                 <button class="btn btn-print" onclick="handlePrint()" title="Imprimir PDF">
                     <i class="fas fa-print"></i>
@@ -27,7 +45,6 @@
             </div>
         </div>
 
-        <!-- Menú colapsable (Botones de Rol y Lenguaje) -->
         <div class="nav-menu-links" id="nav-menu-links">
             <button class="btn btn-nav active" id="btn-software" onclick="updateProfile('software', this); closeMenu()">
                 <i class="fas fa-code"></i> Software
@@ -45,12 +62,10 @@
     </nav>
 
     <div class="cv-wrapper">
-        <!-- SIDEBAR -->
         <aside class="sidebar">
             <div class="profile-container">
                 <div class="photo-frame-round">
                     <div class="photo-container">
-                        <!-- Imágenes con protección contra arrastre y clic derecho -->
                         <img src="Public/images/Picture.webp" alt="Jonathan Mosquera" class="profile-photo" draggable="false" oncontextmenu="return false;" onerror="this.src='https://via.placeholder.com/160?text=JM'">
                         <img src="Public/images/Picture.gif" alt="Jonathan GIF" class="profile-photo profile-gif" draggable="false" oncontextmenu="return false;">
                     </div>
@@ -87,7 +102,6 @@
             </section>
         </aside>
 
-        <!-- MAIN CONTENT -->
         <main class="main-content">
             <header class="main-header">
                 <h1 class="user-fullname">JONATHAN MOSQUERA</h1>
@@ -125,7 +139,6 @@
     </div>
 
     <script>
-        // Configuración inicial de estado
         let currentLang = 'es';
         let currentProfile = 'software'; 
 
@@ -211,7 +224,6 @@
             }
         };
 
-        // Lógica de navegación
         function toggleMenu() {
             const menu = document.getElementById('nav-menu-links');
             menu.classList.toggle('active');
@@ -225,23 +237,18 @@
         function render() {
             const p = data[currentProfile][currentLang];
             const s = staticData[currentLang];
-
             document.getElementById('dynamic-role').innerText = p.role;
             document.getElementById('dynamic-summary').innerText = p.summary;
-            
             Object.keys(s.titles).forEach(id => {
                 const el = document.getElementById(`title-${id}`);
                 if(el) el.innerText = s.titles[id];
             });
-
             document.getElementById('skills-container').innerHTML = s.skills.map(skill => `
                 <div class="skill-item">
                     <div class="skill-name"><span>${skill}</span></div>
                     <div class="progress-bg"><div class="progress-fill" style="width: 90%"></div></div>
                 </div>`).join('');
-
             document.getElementById('sena-list').innerHTML = s.sena.map(item => `<li>${item}</li>`).join('');
-
             document.getElementById('experience-timeline').innerHTML = p.exp.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -257,7 +264,6 @@
                     </ul>
                     ${(e.url && e.url !== "#") ? `<a href="${e.url}" target="_blank" class="exp-link"><i class="fas fa-external-link-alt"></i> ${s.goPage}</a>` : ''}
                 </div>`).join('');
-
             document.getElementById('education-timeline').innerHTML = s.edu.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -289,15 +295,12 @@
 
         window.onload = () => {
             render();
-            
-            // Protección global adicional para todas las imágenes
             document.querySelectorAll('img').forEach(img => {
                 img.addEventListener('contextmenu', e => e.preventDefault());
                 img.addEventListener('dragstart', e => e.preventDefault());
             });
         };
 
-        // Cerrar menú al hacer clic fuera
         document.addEventListener('click', (e) => {
             const menu = document.getElementById('nav-menu-links');
             const btn = document.getElementById('hamburger-btn');
