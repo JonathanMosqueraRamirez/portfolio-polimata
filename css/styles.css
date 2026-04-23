@@ -28,7 +28,7 @@ body {
 }
 
 /* ================================================================
-   NAVEGACIÓN (BOTONES SUPERIORES)
+   NAVEGACIÓN (LOGO JMR + HAMBURGUESA + ADAPTACIÓN)
    ================================================================ */
 .action-buttons {
     position: fixed;
@@ -37,25 +37,72 @@ body {
     width: 100%;
     background: rgba(255, 255, 255, 0.98);
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 15px;
     z-index: 2000;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     backdrop-filter: blur(5px);
 }
 
+.nav-top-bar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Logo Circular JMR */
+.nav-logo {
+    width: 38px;
+    height: 38px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.nav-external-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Botón Hamburguesa */
+.hamburger-btn {
+    display: none; /* Oculto en escritorio */
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: var(--primary-blue);
+    cursor: pointer;
+    padding: 5px;
+}
+
+/* Menú de Enlaces */
+.nav-menu-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
 .btn {
-    padding: 8px 14px;
+    padding: 8px 12px;
     border-radius: 4px;
     border: none;
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     display: flex;
     align-items: center;
     gap: 6px;
     transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
 .btn-nav { background-color: #f1f3f5; color: var(--text-dark); }
@@ -65,18 +112,45 @@ body {
 
 .btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
+/* Adaptación para Escritorio (DESKTOP) */
+@media screen and (min-width: 817px) {
+    .action-buttons {
+        justify-content: center; /* Centrar toda la barra en escritorio */
+        gap: 20px;
+        padding: 8px 20px;
+    }
+    
+    .nav-top-bar {
+        order: -1; /* Logo a la izquierda */
+    }
+
+    .nav-external-actions {
+        order: 2; /* Botón imprimir al final de la fila */
+    }
+    
+    .nav-menu-links {
+        display: flex !important;
+        order: 1;
+    }
+
+    /* En escritorio el botón imprimir recupera su texto vía CSS si es necesario o se mantiene estándar */
+    .btn-print::after {
+        content: " Imprimir PDF";
+    }
+}
+
 /* ================================================================
-   ESTRUCTURA PRINCIPAL (RESPONSIVE & TAMAÑO CARTA)
+   ESTRUCTURA PRINCIPAL
    ================================================================ */
 .cv-wrapper {
-    width: 816px; /* Ancho carta a 96 DPI */
-    max-width: 95%; /* Responsive en móviles */
+    width: 816px; 
+    max-width: 95%;
     margin: 70px auto 30px;
     background: var(--white);
     display: flex; 
     flex-direction: row;
     box-shadow: var(--shadow);
-    min-height: 1056px; /* Alto carta a 96 DPI */
+    min-height: 1056px;
     position: relative;
     overflow: hidden;
 }
@@ -89,13 +163,12 @@ body {
     padding: 30px 20px;
 }
 
-/* --- EFECTO FOTO / GIF --- */
 .photo-frame-round {
     width: 140px;
     height: 140px;
     border: 4px solid rgba(255,255,255,0.2);
     border-radius: 50%;
-    margin: 0 auto 15px;
+    margin: 20px auto 15px;
     overflow: hidden;
     background: #eee;
 }
@@ -104,8 +177,6 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    cursor: pointer;
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .profile-photo, .profile-gif {
@@ -118,11 +189,10 @@ body {
 }
 
 .profile-gif { opacity: 0; }
-.photo-frame-round:hover .photo-container { transform: scale(1.1); }
 .photo-frame-round:hover .profile-photo { opacity: 0; }
 .photo-frame-round:hover .profile-gif { opacity: 1; }
 
-.user-name-sidebar { text-align: center; font-size: 1.2rem; margin-bottom: 25px; }
+.user-name-sidebar { text-align: center; font-size: 1.1rem; margin-bottom: 25px; }
 .sidebar-section { margin-bottom: 25px; }
 .sidebar-title {
     text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px;
@@ -148,8 +218,8 @@ body {
     flex-direction: column;
 }
 
-.user-fullname { color: var(--primary-blue); font-size: 2.4rem; font-weight: 800; line-height: 1; }
-.user-role { font-size: 0.9rem; color: var(--accent-blue); margin-top: 5px; text-transform: uppercase; letter-spacing: 1.5px; }
+.user-fullname { color: var(--primary-blue); font-size: 2.2rem; font-weight: 800; line-height: 1; }
+.user-role { font-size: 0.85rem; color: var(--accent-blue); margin-top: 5px; text-transform: uppercase; letter-spacing: 1.5px; }
 
 .profile-summary {
     margin-top: 15px; font-size: 0.82rem; color: #444; background: var(--light-blue);
@@ -162,12 +232,12 @@ body {
 }
 
 .section-header i {
-    background: var(--primary-blue); color: white; width: 24px; height: 24px;
+    background: var(--primary-blue); color: white; width: 22px; height: 22px;
     display: flex; align-items: center; justify-content: center; border-radius: 3px; font-size: 0.7rem;
 }
 
 /* SCROLLS */
-.scrollable-content-banner, .scrollable-content-edu { max-height: 400px; overflow-y: auto; padding-right: 5px; }
+.scrollable-content-banner, .scrollable-content-edu { max-height: 420px; overflow-y: auto; padding-right: 5px; }
 
 .timeline { position: relative; padding-left: 20px; margin-left: 10px; border-left: 2px solid var(--border-light); }
 .timeline-item { position: relative; margin-bottom: 18px; }
@@ -190,8 +260,6 @@ body {
     text-decoration: none; border: 1px solid var(--accent-blue); padding: 1px 6px; border-radius: 3px;
 }
 
-.edu-details { font-size: 0.78rem; color: var(--text-gray); }
-
 /* FOOTER */
 .cv-footer { margin-top: auto; padding-top: 15px; text-align: center; }
 .footer-line { height: 1px; background: var(--border-light); margin-bottom: 10px; }
@@ -199,28 +267,62 @@ body {
 .footer-content a { color: var(--accent-blue); text-decoration: none; font-weight: 600; }
 
 /* ================================================================
-   ADAPTACIÓN MÓVIL (RESPONSIVE NORMAL)
+   ADAPTACIÓN MÓVIL (PORTRAIT / 5PX MARGIN)
    ================================================================ */
 @media screen and (max-width: 816px) {
+    .action-buttons {
+        flex-direction: column;
+        padding: 8px 5px; /* Margen de 5px a los lados solicitado */
+    }
+
+    .nav-top-bar {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .hamburger-btn { display: block; }
+    
+    .nav-menu-links {
+        display: none; 
+        flex-direction: column;
+        width: 100%;
+        margin-top: 10px;
+        background: #fff;
+        padding-bottom: 10px;
+        border-top: 1px solid var(--border-light);
+    }
+    
+    .nav-menu-links.active { display: flex; }
+
+    .btn-nav, .btn-lang {
+        width: 100%;
+        justify-content: center;
+        padding: 12px;
+        border-radius: 0;
+        font-size: 0.9rem;
+    }
+
+    /* Ocultar el texto del botón imprimir en móvil para que quede solo el icono junto a la hamburguesa */
+    .btn-print::after {
+        content: none;
+    }
+
     .cv-wrapper {
         flex-direction: column;
         width: 100%;
-        margin-top: 60px;
+        margin-top: 65px;
     }
-    .sidebar, .main-content {
-        width: 100%;
-    }
+    .sidebar, .main-content { width: 100%; }
     .sidebar { padding: 25px; }
     .main-content { padding: 20px; }
-    .user-fullname { font-size: 1.8rem; }
 }
 
 /* ================================================================
-   IMPRESIÓN (TAMAÑO CARTA GARANTIZADO)
+   REGLA DE IMPRESIÓN (SOLO 4 EXPERIENCIAS)
    ================================================================ */
 @media print {
     @page { 
-        size: letter; /* 8.5in x 11in */
+        size: letter; 
         margin: 0; 
     }
     
@@ -228,8 +330,8 @@ body {
     .no-print { display: none !important; }
 
     .cv-wrapper {
-        width: 816px !important; /* Forzar ancho físico */
-        min-height: 1056px !important; /* Forzar alto físico */
+        width: 816px !important;
+        height: 1056px !important;
         margin: 0 !important;
         box-shadow: none !important;
         display: flex !important;
@@ -238,16 +340,18 @@ body {
         print-color-adjust: exact;
     }
 
-    .sidebar { width: 30% !important; background-color: var(--primary-blue) !important; color: white !important; }
-    .main-content { width: 70% !important; }
-    
-    .profile-photo { opacity: 1 !important; }
-    .profile-gif { display: none !important; }
+    .sidebar { width: 32% !important; background-color: var(--primary-blue) !important; color: white !important; }
+    .main-content { width: 68% !important; }
     
     .scrollable-content-banner, .scrollable-content-edu {
         max-height: none !important;
         overflow: visible !important;
     }
 
-    .timeline-item, .sidebar-section, .cv-footer { page-break-inside: avoid; }
+    /* REGLA SOLICITADA: Ocultar de la 5ta experiencia en adelante */
+    #experience-timeline .timeline-item:nth-child(n+5) {
+        display: none !important;
+    }
+
+    .timeline-item, .sidebar-section { page-break-inside: avoid; }
 }

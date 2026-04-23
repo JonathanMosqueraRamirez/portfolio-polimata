@@ -10,23 +10,38 @@
 </head>
 <body>
 
-    <!-- NAVEGACIÓN -->
+    <!-- NAVEGACIÓN RESTAURADA -->
     <nav class="action-buttons no-print">
-        <button class="btn btn-nav active" id="btn-software" onclick="updateProfile('software', this)">
-            <i class="fas fa-code"></i> Software
-        </button>
-        <button class="btn btn-nav" onclick="updateProfile('operaciones', this)">
-            <i class="fas fa-cogs"></i> Operaciones
-        </button>
-        <button class="btn btn-nav" onclick="updateProfile('hibrido', this)">
-            <i class="fas fa-sync-alt"></i> Híbrido
-        </button>
-        <button class="btn btn-lang" onclick="toggleLanguage()">
-            <i class="fas fa-language"></i> <span id="lang-label">ES | EN</span>
-        </button>
-        <button class="btn btn-print" onclick="handlePrint()">
-            <i class="fas fa-file-pdf"></i> Imprimir PDF
-        </button>
+        <div class="nav-top-bar">
+            <!-- Logo JMR (Fondo negro, letras blancas definido en CSS) -->
+            <div class="nav-logo">JMR</div>
+            
+            <!-- Grupo de acciones externas (Imprimir y Hamburguesa) -->
+            <div class="nav-external-actions">
+                <button class="btn btn-print" onclick="handlePrint()" title="Imprimir PDF">
+                    <i class="fas fa-print"></i>
+                </button>
+                <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMenu()" aria-label="Menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú colapsable (Botones de Rol y Lenguaje) -->
+        <div class="nav-menu-links" id="nav-menu-links">
+            <button class="btn btn-nav active" id="btn-software" onclick="updateProfile('software', this); closeMenu()">
+                <i class="fas fa-code"></i> Software
+            </button>
+            <button class="btn btn-nav" onclick="updateProfile('operaciones', this); closeMenu()">
+                <i class="fas fa-cogs"></i> Operaciones
+            </button>
+            <button class="btn btn-nav" onclick="updateProfile('hibrido', this); closeMenu()">
+                <i class="fas fa-sync-alt"></i> Híbrido
+            </button>
+            <button class="btn btn-lang" onclick="toggleLanguage()">
+                <i class="fas fa-language"></i> <span id="lang-label">ES | EN</span>
+            </button>
+        </div>
     </nav>
 
     <div class="cv-wrapper">
@@ -35,8 +50,9 @@
             <div class="profile-container">
                 <div class="photo-frame-round">
                     <div class="photo-container">
-                        <img src="Public/images/Picture.webp" alt="Jonathan Mosquera" class="profile-photo" onerror="this.src='https://via.placeholder.com/160?text=JM'">
-                        <img src="Public/images/Picture.gif" alt="Jonathan GIF" class="profile-gif">
+                        <!-- Imágenes con protección contra arrastre y clic derecho -->
+                        <img src="Public/images/Picture.webp" alt="Jonathan Mosquera" class="profile-photo" draggable="false" oncontextmenu="return false;" onerror="this.src='https://via.placeholder.com/160?text=JM'">
+                        <img src="Public/images/Picture.gif" alt="Jonathan GIF" class="profile-photo profile-gif" draggable="false" oncontextmenu="return false;">
                     </div>
                 </div>
                 <h3 class="user-name-sidebar">Jonathan Mosquera</h3>
@@ -45,7 +61,6 @@
             <section class="sidebar-section">
                 <h3 class="sidebar-title" id="title-contact">Contacto</h3>
                 <ul class="contact-info">
-                    <li><i class="fas fa-id-card"></i> 1.088.285.173</li>
                     <li><i class="fas fa-phone"></i> 323 495 7229</li>
                     <li><i class="fas fa-envelope"></i> ing.jonathanmosquera@gmail.com</li>
                     <li><i class="fas fa-map-marker-alt"></i> Dosquebradas, Risaralda</li>
@@ -98,7 +113,6 @@
                 </div>
             </section>
 
-            <!-- FOOTER INTEGRADO -->
             <footer class="cv-footer">
                 <div class="footer-line"></div>
                 <div class="footer-content">
@@ -118,22 +132,22 @@
         const data = {
             software: {
                 es: {
-                    role: "Junior Full Stack Developer | Industrial Data Architect",
-                    summary: "Ingeniero Mecánico y Desarrollador Junior enfocado en la creación de soluciones industriales escalables. Especializado en Clean Architecture y en la transformación de flujos operativos complejos en ecosistemas digitales eficientes. Con una sólida base técnica en Big Data industrial, automatización mediante VBA/Excel y una gran capacidad de aprendizaje para el despliegue de tecnologías modernas.",
+                    role: "Industrial Data Architect | Full Stack Developer",
+                    summary: "Ingeniero Mecánico y Desarrollador Full Stack con mentalidad de arquitecto. Especializado en el diseño de soluciones de datos industriales de alta complejidad, desde la migración de sistemas críticos como SAP/MAXIMO hasta el desarrollo de ecosistemas digitales en Clean Architecture. Mi enfoque combina la precisión de la ingeniería con la escalabilidad de tecnologías modernas como Next.js y Python para transformar flujos operativos en activos digitales eficientes.",
                     exp: [
                         { t: "Fundador & Arquitecto de Software", c: "Lethan Soluciones", d: "2018 - 2021", url: "https://lethansoluciones.com", tasks: ["Diseño y arquitectura de ecosistemas digitales a medida.", "Digitalización de procesos de ingeniería y optimización operativa."] },
-                        { t: "Sistema DMEPS", c: "Health Monitoring System", d: "2023 - 2024", url: "https://dmeps.com", tasks: ["Desarrollo de monitoreo para EPS (Savia Salud, Nueva EPS).", "Implementación de métricas financieras y técnico-científicas."] },
+                        { t: "Sistema DMEPS", c: "Health Monitoring System", d: "2023 - 2024", url: "https://dmeps.com", tasks: ["Desarrollo de monitoreo para EPS", "Implementación de métricas financieras y técnico-científicas."] },
                         { t: "Aevoid.com", c: "Aethereum", d: "2022 - Actual", url: "https://aevoid.com", tasks: ["Plataforma de productividad basada en IA.", "Diseño y despliegue en Next.js y Vercel."] },
                         { t: "Buda ERP", c: "Sistemas Industriales", d: "2021 - 2023", url: "#", tasks: ["Arquitectura de módulos de ingeniería de troqueles.", "Optimización de corte mediante algoritmos de materiales."] },
                         { t: "Soporte IT / Data Architect", c: "Soluciones Industriales GYP", d: "2021 - 2024", url: "#", tasks: ["Ecosistema digital para 30,000+ registros.", "Automatización de nómina y migración a SAP/MAXIMO."] }
                     ]
                 },
                 en: {
-                    role: "Junior Full Stack Developer | Industrial Data Architect",
-                    summary: "Mechanical Engineer and Junior Developer focused on creating scalable industrial solutions. Specialized in Clean Architecture and transforming complex operational flows into efficient digital ecosystems. With a solid technical foundation in industrial Big Data, VBA/Excel automation, and a high learning capacity for deploying modern technologies.",
+                    role: "Industrial Data Architect | Full Stack Developer",
+                    summary: "Mechanical Engineer and Full Stack Developer with an architect's mindset. Specialized in designing high-complexity industrial data solutions, from critical system migrations (SAP/MAXIMO) to developing digital ecosystems using Clean Architecture. My approach merges engineering precision with the scalability of modern technologies like Next.js and Python to transform operational flows into efficient digital assets.",
                     exp: [
                         { t: "Founder & Software Architect", c: "Lethan Soluciones", d: "2018 - 2021", url: "https://lethansoluciones.com", tasks: ["Design and architecture of custom digital ecosystems.", "Digitalization of engineering processes and operational optimization."] },
-                        { t: "DMEPS System", c: "Health Monitoring System", d: "2023 - 2024", url: "https://dmeps.com", tasks: ["Monitoring system development for Health Entities (Savia Salud, Nueva EPS).", "Implementation of financial and technical-scientific metrics."] },
+                        { t: "DMEPS System", c: "Health Monitoring System", d: "2023 - 2024", url: "https://dmeps.com", tasks: ["Monitoring system development for Health Entities", "Implementation of financial and technical-scientific metrics."] },
                         { t: "Aevoid.com", c: "Aethereum", d: "2022 - Present", url: "https://aevoid.com", tasks: ["AI-based productivity platform.", "Design and deployment using Next.js and Vercel."] },
                         { t: "Buda ERP", c: "Industrial Systems", d: "2021 - 2023", url: "#", tasks: ["Architecture of die engineering modules.", "Cutting optimization via material algorithms."] },
                         { t: "IT Support / Data Architect", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Digital ecosystem for 30,000+ records.", "Payroll automation and migration to SAP/MAXIMO."] }
@@ -143,18 +157,18 @@
             operaciones: {
                 es: {
                     role: "Ingeniero de Operaciones | Project Manager",
-                    summary: "Ingeniero Mecánico con enfoque en la dirección de proyectos industriales y optimización operativa. Especialista en liderar equipos técnicos y aplicar metodologías Lean. Domina herramientas de Project Management y automatización en Office para maximizar la productividad y seguridad.",
+                    summary: "Líder de ingeniería con amplia trayectoria en la dirección de proyectos industriales de alto impacto. Experto en la coordinación técnica de montajes y mantenimiento para sectores estratégicos (Hitachi Energy), asegurando la trazabilidad operativa y el cumplimiento de estándares internacionales. Mi perfil integra una gestión de cuadrillas eficiente con el uso de herramientas avanzadas de Project Management para maximizar la productividad y la seguridad en campo.",
                     exp: [
-                        { t: "Director Comercial / Técnico", c: "Soluciones Industriales GYP", d: "2021 - 2024", url: "#", tasks: ["Liderazgo técnico en proyectos con Hitachi Energy y Suzuki.", "Optimización de procesos de mantenimiento y montaje."] },
+                        { t: "Director Comercial / Técnico", c: "Soluciones Industriales GYP", d: "2021 - 2024", url: "#", tasks: ["Liderazgo técnico en proyectos con Hitachi Energy.", "Optimización de procesos de mantenimiento y montaje."] },
                         { t: "Ingeniero Residente", c: "Ingeniería de Pereira (Bioenergy)", d: "2016 - 2018", url: "#", tasks: ["Supervisión de cuadrillas de 30+ operarios.", "Control de Dossier de calidad e interpretación de isométricos."] },
                         { t: "Ingeniero Residente", c: "Industrias del Pacífico", d: "2015 - 2019", url: "#", tasks: ["Montaje de tanques y estructuras metálicas certificadas.", "Garantía de estándares de soldadura y seguridad industrial."] }
                     ]
                 },
                 en: {
                     role: "Operations Engineer | Project Manager",
-                    summary: "Mechanical Engineer with a focus on industrial project management and operational optimization. Specialist in leading technical teams and applying Lean methodologies. Mastery of Project Management tools and Office automation to maximize productivity and safety.",
+                    summary: "Engineering leader with extensive experience in directing high-impact industrial projects. Expert in technical coordination for assembly and maintenance in strategic sectors (Hitachi Energy), ensuring operational traceability and compliance with international standards. My profile integrates efficient crew management with advanced Project Management tools to maximize productivity and safety in the field.",
                     exp: [
-                        { t: "Commercial / Technical Director", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Technical leadership for projects with Hitachi Energy and Suzuki.", "Optimization of maintenance and assembly processes."] },
+                        { t: "Commercial / Technical Director", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Technical leadership for projects with Hitachi Energy.", "Optimization of maintenance and assembly processes."] },
                         { t: "Resident Engineer", c: "Ingeniería de Pereira (Bioenergy)", d: "2016 - 2018", url: "#", tasks: ["Supervision of 30+ operators crews.", "Quality Dossier control and isometric drawing interpretation."] },
                         { t: "Resident Engineer", c: "Industrias del Pacífico", d: "2015 - 2019", url: "#", tasks: ["Assembly of tanks and certified metallic structures.", "Assurance of welding standards and industrial safety."] }
                     ]
@@ -163,7 +177,7 @@
             hibrido: {
                 es: {
                     role: "Consultor en Transformación Digital | Ing. Mecánico",
-                    summary: "Especialista en cerrar la brecha entre el diseño de ingeniería y la ejecución digital. Capacidad probada para digitalizar procesos de manufactura mediante VBA, Excel y software a medida, optimizando la trazabilidad industrial y el Project Management.",
+                    summary: "Consultor en Transformación Digital con una ventaja competitiva única: entiendo el proceso porque estoy inmerso en él. Como Ingeniero Mecánico y Desarrollador, no solo programo herramientas, sino que diseño soluciones basadas en una comprensión profunda de la realidad operativa en planta. Esta inmersión me permite cerrar la brecha entre el diseño de ingeniería y la ejecución digital, ofreciendo un servicio superior que optimiza la trazabilidad y la toma de decisiones.",
                     exp: [
                         { t: "Consultor Técnico Digital", c: "Soluciones Industriales GYP", d: "2021 - 2024", url: "#", tasks: ["Digitalización de procesos de trazabilidad de activos.", "Desarrollo de tableros para transparencia de costos operativos."] },
                         { t: "Fundador & Consultor", c: "Lethan Soluciones", d: "2018 - 2021", url: "https://lethansoluciones.com", tasks: ["Diseño estructural de alta precisión con software CAD/BIM.", "Optimización de proyectos mediante integración tecnológica."] }
@@ -171,7 +185,7 @@
                 },
                 en: {
                     role: "Digital Transformation Consultant | Mechanical Eng.",
-                    summary: "Specialist in bridging the gap between engineering design and digital execution. Proven ability to digitalize manufacturing processes through VBA, Excel, and custom software, optimizing industrial traceability and Project Management.",
+                    summary: "Digital Transformation Consultant with a unique competitive edge: I understand the process because I am immersed in it. As a Mechanical Engineer and Developer, I don't just code tools; I design solutions based on a deep understanding of shop-floor operational reality. This immersion allows me to bridge the gap between engineering design and digital execution, providing a superior service that optimizes traceability and decision-making.",
                     exp: [
                         { t: "Digital Technical Consultant", c: "GYP Industrial Solutions", d: "2021 - 2024", url: "#", tasks: ["Digitalization of asset traceability processes.", "Dashboard development for operational cost transparency."] },
                         { t: "Founder & Consultant", c: "Lethan Soluciones", d: "2018 - 2021", url: "https://lethansoluciones.com", tasks: ["High-precision structural design using CAD/BIM software.", "Project optimization through technology integration."] }
@@ -197,31 +211,37 @@
             }
         };
 
+        // Lógica de navegación
+        function toggleMenu() {
+            const menu = document.getElementById('nav-menu-links');
+            menu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const menu = document.getElementById('nav-menu-links');
+            menu.classList.remove('active');
+        }
+
         function render() {
             const p = data[currentProfile][currentLang];
             const s = staticData[currentLang];
 
-            // Renderizado de textos principales
             document.getElementById('dynamic-role').innerText = p.role;
             document.getElementById('dynamic-summary').innerText = p.summary;
             
-            // Actualización de títulos
             Object.keys(s.titles).forEach(id => {
                 const el = document.getElementById(`title-${id}`);
                 if(el) el.innerText = s.titles[id];
             });
 
-            // Renderizado de habilidades
             document.getElementById('skills-container').innerHTML = s.skills.map(skill => `
                 <div class="skill-item">
                     <div class="skill-name"><span>${skill}</span></div>
                     <div class="progress-bg"><div class="progress-fill" style="width: 90%"></div></div>
                 </div>`).join('');
 
-            // SENA
             document.getElementById('sena-list').innerHTML = s.sena.map(item => `<li>${item}</li>`).join('');
 
-            // Experiencia
             document.getElementById('experience-timeline').innerHTML = p.exp.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -238,7 +258,6 @@
                     ${(e.url && e.url !== "#") ? `<a href="${e.url}" target="_blank" class="exp-link"><i class="fas fa-external-link-alt"></i> ${s.goPage}</a>` : ''}
                 </div>`).join('');
 
-            // Educación
             document.getElementById('education-timeline').innerHTML = s.edu.map(e => `
                 <div class="timeline-item">
                     <div class="timeline-node"></div>
@@ -263,7 +282,6 @@
             render();
         }
 
-        // Función de impresión
         function handlePrint() {
             window.focus();
             window.print();
@@ -271,7 +289,22 @@
 
         window.onload = () => {
             render();
+            
+            // Protección global adicional para todas las imágenes
+            document.querySelectorAll('img').forEach(img => {
+                img.addEventListener('contextmenu', e => e.preventDefault());
+                img.addEventListener('dragstart', e => e.preventDefault());
+            });
         };
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('nav-menu-links');
+            const btn = document.getElementById('hamburger-btn');
+            if (menu.classList.contains('active') && !menu.contains(e.target) && !btn.contains(e.target)) {
+                closeMenu();
+            }
+        });
     </script>
 </body>
 </html>
